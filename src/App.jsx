@@ -1,12 +1,31 @@
-import { useState } from 'react'
+import { useState ,useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Summary from './components/Summary'
 import bhh27Icon from './assets/img/BHH27icon.png'
+import gw from './assets/img/gw.png'
+
 import Forest from './components/Forest'
 import Tree from './components/Tree'
+import './assets/css/treeAnimation.css'
+
+const randInt = (min, max) => Math.random() * (max - min) + min;
 
 function App() {
+
+  const [trees, setTrees] = useState([]);
+
+  useEffect(() => {
+     let intervalId = setInterval(() => {
+        setTrees(prevTrees => [
+          ...prevTrees,
+          <Tree key={prevTrees.length} x={randInt(0, 90)} y={randInt(-11, -6)}  />
+        ]);
+      }, 1000);
+      
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <>
       <main className=' bg-white text-black w-full min-h-screen flex items-center justify-start flex-col gap-2'>
@@ -17,17 +36,18 @@ function App() {
         </header> */}
         <div className="bg-cover"></div>
       
-        <div className='content w-full h-[800px] pt-5 px-0 flex items-center justify-start sm:justify-center flex-col  gap-3'>
+        <div className='content w-full pt-[60px] px-0 flex items-center justify-start sm:justify-start flex-col  '>
         <div className="icon-set flex gap-5 w-full items-center justify-center"> 
           <div className="w-full max-w-[120px]">
             <img src={bhh27Icon} className='object-contain w-full h-full' alt="bhh27icon" />
           </div>
           <div className="w-full max-w-[120px]">
-            <img src='https://pics.clipartpng.com/Green_Leaf_Earth_PNG_Clipart-2978.png' className='object-contain' alt="bhh27icon" />
+            <img src={gw} className='object-contain' alt="bhh27icon" />
           </div>
         </div>
-          <Summary />
-        <Forest/>
+        
+         <Summary treeCount={trees.length} />
+         <Forest trees={trees}/>
         
     {/*     <div className="w-full flex items-center justify-center  gap-4">
             <Tree/>

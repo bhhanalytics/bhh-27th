@@ -1,56 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import backgroundImage from '../assets/img/forest/floor.svg'; // Import your background image
-import land from '../assets/img/forest/land13.svg'; // Import your background image
-import underWater from '../assets/img/forest/underwater.svg'
-import Tree from './Tree';
+import React, { useEffect, useState } from "react";
+import backgroundImage from "../assets/img/forest/floor.svg"; // Import your background image
+import land from "../assets/img/forest/land13.svg"; // Import your background image
+import underWater from "../assets/img/forest/underwater.svg";
+import Tree from "./Tree";
 
 
+  
+export default function Forest({ trees }) {
 
-export default function Forest() {
-    const [circleDimensions, setCircleDimensions] = useState({ cx: 50, cy: 50, r: 25 });
-    const [dots, setDots] = useState([]);
-
-    useEffect(() => {
-        generateRandomDots(circleDimensions.r, 10); // Generate 10 random dots within the circle
-    }, [circleDimensions]);
-
-    const generateRandomDots = (radius, numberOfDots) => {
-        const newDots = [];
-        for (let i = 0; i < numberOfDots; i++) {
-            let x, y;
-            do {
-                x = Math.random() * (2 * radius) - radius;
-                y = Math.random() * (2 * radius) - radius;
-            } while (x * x + y * y > radius * radius); // Ensure the point is inside the circle
-            newDots.push({ x: x + circleDimensions.cx, y: y + circleDimensions.cy });
-        }
-        setDots(newDots);
-    };
-
-    return (
-        <section className='w-full absolute bottom-0 h-[100px] '>
-            <div className='land'>
-                <img className='island' src={land} alt="" />
-
-                <img className='driver' src={underWater} alt="" />
-        
-                </div>
-
-            {/* <div className="ocean">
-                <div className="wave"></div>
-                <div className="wave"></div>
-                <div className='land'>
-                <Tree/>
-                <img src={land} alt="" />
-                </div>
-                <div className="wave"></div>
-            </div> */}
-        </section>
-    );
+  
+  
+    // Function to generate random number in a range
+  return (
+    <section className="w-full">
+      <div className="land">
+        <div className="relative w-full">
+          <svg
+            className="island overflow-visible relative"
+            width="100%"
+            height="100%"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <image
+                imageRendering={'cover'}
+                width="100"
+                height="100"
+                x="0"
+                y="-50"
+                href={land} // Ensure that 'land' is a valid URL or path to the image
+            />
+   
+        { trees.map((item)=> item)}
+          </svg>
+        </div>
+        <div className="relative pt-[500px]">
+          <img className="driver" src={underWater} alt="" />
+        </div>
+      </div>
+    </section>
+  );
 }
-
-
-
 
 /* export default function Forest() {
     const [circleDimensions, setCircleDimensions] = useState({ cx: 50, cy: 50, r: 25 });
