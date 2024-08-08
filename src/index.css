@@ -25,6 +25,8 @@
 }
 #root{
   width: 100%;
+  background: rgb(85, 179, 227);
+
 }
 
 a {
@@ -42,6 +44,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
+  background: #000;
 }
 
 h1 {
@@ -79,6 +83,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.bg-cover{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: url('./assets/img/forest/bg.png') no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: center;
+  background-blend-mode:darken;
+  z-index: 0;
+  opacity: 30%;
 }
 
 /***************************************************
@@ -905,43 +924,52 @@ button:focus-visible {
 }
 
 .tree {
+  left: 10px;
+  bottom: 130px;
+  animation: sway 2s infinite  cubic-bezier(0.42, 0.0, 0.58, 1.0);
+  transform: scale(.4) !important;
+  z-index: 10;
+}
+
+.tree-planted{
+  position: absolute;
+  left: 10px;
+  bottom: 130px;
   transform-origin: bottom center;
   animation: sway 2s infinite  cubic-bezier(0.42, 0.0, 0.58, 1.0);
+  transform: scale(.4) !important;
+  z-index: 10;
 }
 
 
-
-
-
 .ocean { 
-  height: 5%;
+  height: 800px;
   width:100%;
-  position:absolute;
-  bottom:0;
-  left:0;
-  background: #015871;
 }
 
 .wave {
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
   position: absolute;
-  top: -198px;
+  top: -80px;
   width: 6400px;
   height: 198px;
   animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
   filter: hue-rotate(20deg);
+  z-index: 1;
 }
-
 .wave:nth-of-type(2) {
-  top: -175px;
+  top: -80px;
   animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
-  opacity: 1;
+  filter: hue-rotate(15deg);
+  z-index: 1;
 }
 .wave:nth-of-type(3) {
-  top: -205px;
-  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+  top: -120px;
+  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.135s infinite, swell 7s ease -1.35s infinite;
   opacity: 1;
+  filter: hue-rotate(200deg);
+  z-index: 1;
 }
 
 @keyframes wave {
@@ -963,4 +991,28 @@ button:focus-visible {
 }
 
 
+.land{
+  width: 100%;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  background: rgb(117, 170, 227);
+}
 
+.island {
+  width: 100%;
+  position: absolute;
+  top:-100px;
+}
+
+.driver {
+  width: 100%;
+  margin-top: 800px;
+}
+
+@media (max-width: 768px) {
+  .island{
+    top:-40px;
+  }
+  
+}

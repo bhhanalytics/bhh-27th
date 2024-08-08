@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import backgroundImage from '../assets/img/forest/floor.svg'; // Import your background image
+import land from '../assets/img/forest/land13.svg'; // Import your background image
+import underWater from '../assets/img/forest/underwater.svg'
+import Tree from './Tree';
 
 
 
@@ -25,11 +28,23 @@ export default function Forest() {
     };
 
     return (
-        <section className='w-full fixed bottom-0'>
-            <div class="ocean">
-                <div class="wave"></div>
-                <div class="wave"></div>
-            </div>
+        <section className='w-full absolute bottom-0 h-[100px] '>
+            <div className='land'>
+                <img className='island' src={land} alt="" />
+
+                <img className='driver' src={underWater} alt="" />
+        
+                </div>
+
+            {/* <div className="ocean">
+                <div className="wave"></div>
+                <div className="wave"></div>
+                <div className='land'>
+                <Tree/>
+                <img src={land} alt="" />
+                </div>
+                <div className="wave"></div>
+            </div> */}
         </section>
     );
 }
