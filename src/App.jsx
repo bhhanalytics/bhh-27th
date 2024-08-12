@@ -8,8 +8,16 @@ import gw from './assets/img/gw.png'
 import Forest from './components/Forest'
 import Tree from './components/Tree'
 import './assets/css/treeAnimation.css'
+import {
+  Modal,
+} from "antd";
+import { Link } from 'react-router-dom'
 
 const randInt = (min, max) => Math.random() * (max - min) + min;
+
+//* Test variable 
+    const TICK = 1000;
+//*
 
 function App() {
 
@@ -21,10 +29,30 @@ function App() {
           ...prevTrees,
           <Tree key={prevTrees.length} x={randInt(0, 90)} y={randInt(-11, -6)}  />
         ]);
-      }, 1000);
+      }, TICK);
       
     return () => clearInterval(intervalId);
   }, []);
+
+   useEffect(()=>{
+    Modal.info({
+      title: 'Before Start',
+      content: <>
+      <h5> Page </h5>
+      <ul> 
+          <li> <a href={'/admin'}> - Admin </a>  </li>
+          <li> <a href={'/'}> - Card (Coming soon) </a>  </li>
+      </ul>
+
+      <hr className='my-3' />
+      <h5> Setting (ตั้งแต่ Line 18) </h5>
+
+
+      <hr className='my-3' />
+      <span className='border-b-4 border-red-500   p-1 rounded-sm  '>(ปิด Modal นี้ในไฟล์ App.jsx line 37)</span>
+      </>,
+    })
+   },[])
 
   return (
     <>

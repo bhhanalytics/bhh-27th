@@ -27,7 +27,7 @@ const SummaryItem = ({ value , subtitile , icon , postfix ,className  }) =>{
         <div className={`item ${className || 'md:col-span-6 '} h-fit col-span-12 flex gap-2  p-3 rounded-md justify-startitems-center md:justify-center`}> 
             <div className="icon px-2 flex items-center justify-center text-[2rem]"> {icon} </div>
             <div className="text flex flex-col">
-                    <div className="value text-[4rem]"> <NumberCounter start={0} end={value} interval={100}/> <span className='text-[1.2rem]'>  {postfix} </span> </div>
+                    <div className="value text-[4rem]"> <NumberCounter start={0} end={value} interval={1}/> <span className='text-[1.2rem]'>  {postfix} </span> </div>
                     <div className="sub-title"> {subtitile}  </div>
             </div>
         </div>

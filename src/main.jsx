@@ -8,6 +8,7 @@ import {
 import './index.css'
 // Component
 import App from './App';
+import Dashboard from './admin/Dashboard';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,6 +37,10 @@ let routerSet = [
     path: "/",
     element: <App/>,
   },
+  {
+    path: "/admin",
+    element: <Dashboard/>
+  },
   // =============================
   // Handler
 /*   {
@@ -51,8 +56,8 @@ let routerSet = [
 
 let router = createBrowserRouter(routerSet);
   ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
+  /*   <React.StrictMode> */
       <RouterProvider router={router} />
-    </React.StrictMode>,
+  /*   </React.StrictMode>, */
   )
 
