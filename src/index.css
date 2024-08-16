@@ -131,6 +131,10 @@ button:focus-visible {
   animation: sway 2s infinite 0s cubic-bezier(0.42, 0.0, 0.58, 1.0) !important;
   z-index: 10;
 }
+.crab{
+  animation: sway 2s infinite 0s cubic-bezier(0.42, 0.0, 0.58, 1.0) !important;
+  z-index: 11;
+}
 
 .ocean { 
   height: 800px;

@@ -34,7 +34,7 @@ function App() {
     return () => clearInterval(intervalId);
   }, []);
 
-   useEffect(()=>{
+ /*   useEffect(()=>{
     Modal.info({
       title: 'Before Start',
       content: <>
@@ -52,7 +52,7 @@ function App() {
       <span className='border-b-4 border-red-500   p-1 rounded-sm  '>(ปิด Modal นี้ในไฟล์ App.jsx line 37)</span>
       </>,
     })
-   },[])
+   },[]) */
 
   return (
     <>
