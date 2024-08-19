@@ -13,7 +13,7 @@ export default function Summary({ treeCount }) {
 
           {/*   <SummaryItem icon={ <Icon icon="ph:trend-up" />} value={2030230232} subtitile={"ยอดบริจาค"} postfix={'บาท'}  className={'md:col-span-12'} /> */}
             <SummaryItem icon={ <Icon icon="ph:plant-fill"  />}  value={totalTrees} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
-            <SummaryItem icon={<Icon icon="material-symbols:co2" /> } value={totalTrees*9.5} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> tCO<sub>2</sub>eq </>} />
+            <SummaryItem icon={<Icon icon="material-symbols:co2" /> } value={totalTrees*9.5} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> kgCo<sub>2</sub> eq </>} />
 
     </section>
   )

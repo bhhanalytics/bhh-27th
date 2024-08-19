@@ -213,3 +213,9 @@ button:focus-visible {
   }
   
 }
+
+.form-img-bg{
+  background: url('./assets/img/Mesa de trabajo 1.png') no-repeat;
+  background-size: cover;
+  
+}

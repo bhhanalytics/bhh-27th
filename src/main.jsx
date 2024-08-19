@@ -9,6 +9,8 @@ import './index.css'
 // Component
 import App from './App';
 import Dashboard from './admin/Dashboard';
+import DonateForm from './user/DonateForm';
+import Login from './admin/Login';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -41,6 +43,14 @@ let routerSet = [
     path: "/admin",
     element: <Dashboard/>
   },
+  {
+    path: "/form",
+    element: <DonateForm />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  }
   // =============================
   // Handler
 /*   {

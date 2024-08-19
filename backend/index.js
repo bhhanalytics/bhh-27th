@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'prod') {
 }
 
 import taskRouter from './routes/task.js';
+import donate from './routes/donate.js';
 
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, '/views'));
@@ -32,7 +33,7 @@ const api = axios.create({
 });
 
 // Allow all origins with all methods
-app.use(cors());
+app.use(cors({ origin:['http://172.16.2.85:5173','http://127.0.0.1:5173'] }));
 app.disable('x-powered-by');
 
 
@@ -66,11 +67,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 
-app.use('/api',taskRouter)
+app.use('/api',taskRouter);
+app.use('/form',donate);
 
-    const port = process.env.PORT || 8080;
-    const server = app.listen(port, () => {
-        console.log(`start at  http://localhost:${port}`)
-    })
+const port = process.env.PORT || 8080;
+const server = app.listen(port, () => {
+    console.log(`start at  http://localhost:${port}`)
+})
 
 
