@@ -217,3 +217,28 @@ button:focus-visible {
   }
   
 }
+
+
+.plant {
+  background-color: #34db74aa;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  padding: 10px;
+  transition: transform 0.3s ease;
+  width:  300px; /* Ensures a minimum size */
+  height: 300px;
+}
+
+
+.carbon {
+  background-color: #3498db;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  padding: 10px;
+  transition: transform 0.3s ease;
+  width:  300px; /* Ensures a minimum size */
+  height: 300px;
+  transform: scale(.7);
+}

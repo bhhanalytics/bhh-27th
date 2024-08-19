@@ -1,6 +1,3 @@
-
-
-import { speed } from 'jquery';
 import React, {useState , useEffect} from 'react'
 
 const randInt = (min, max) => Math.random() * (max - min) + min;
