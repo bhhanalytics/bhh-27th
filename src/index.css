@@ -131,6 +131,10 @@ button:focus-visible {
   animation: sway 2s infinite 0s cubic-bezier(0.42, 0.0, 0.58, 1.0) !important;
   z-index: 10;
 }
+.crab{
+  animation: sway 2s infinite 0s cubic-bezier(0.42, 0.0, 0.58, 1.0) !important;
+  z-index: 11;
+}
 
 .ocean { 
   height: 800px;
@@ -214,8 +218,32 @@ button:focus-visible {
   
 }
 
+
 .form-img-bg{
   background: url('./assets/img/Mesa de trabajo 1.png') no-repeat;
   background-size: cover;
-  
+}
+
+
+.plant {
+  background-color: #34db74aa;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  padding: 10px;
+  transition: transform 0.3s ease;
+  width:  300px; /* Ensures a minimum size */
+  height: 300px;
+}
+
+.carbon {
+  background-color: #3498db;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  padding: 10px;
+  transition: transform 0.3s ease;
+  width:  300px; /* Ensures a minimum size */
+  height: 300px;
+  transform: scale(.7);
 }
