@@ -12,8 +12,9 @@ export default function Summary({ treeCount }) {
     <section className='w-2/4 grid grid-cols-12  mt-[100px] text-black p-5 items-center justify-center pb-[500px]'>
 
           {/*   <SummaryItem icon={ <Icon icon="ph:trend-up" />} value={2030230232} subtitile={"ยอดบริจาค"} postfix={'บาท'}  className={'md:col-span-12'} /> */}
-            <SummaryItem className={'plant'} icon={ <Icon icon="ph:plant-fill"  />}  value={totalTrees} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
-            <SummaryItem className={'carbon'} icon={<Icon icon="material-symbols:co2" /> } value={Math.round(totalTrees*9.5)} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> tCO<sub>2</sub>eq </>} />
+
+            <SummaryItem icon={ <Icon icon="ph:plant-fill"  />}  value={totalTrees} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
+            <SummaryItem icon={<Icon icon="material-symbols:co2" /> } value={totalTrees*9.5} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> kgCo<sub>2</sub> eq </>} />
 
     </section>
   )

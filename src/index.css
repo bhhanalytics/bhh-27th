@@ -219,6 +219,12 @@ button:focus-visible {
 }
 
 
+.form-img-bg{
+  background: url('./assets/img/Mesa de trabajo 1.png') no-repeat;
+  background-size: cover;
+}
+
+
 .plant {
   background-color: #34db74aa;
   color: white;
@@ -229,7 +235,6 @@ button:focus-visible {
   width:  300px; /* Ensures a minimum size */
   height: 300px;
 }
-
 
 .carbon {
   background-color: #3498db;

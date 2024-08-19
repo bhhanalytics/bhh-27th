@@ -20,6 +20,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 import DynamicTable from "../components/DynamicTable";
+import { useNavigate } from "react-router-dom";
 
 const RowContext = createContext({});
 const { RangePicker } = DatePicker;
@@ -78,7 +79,12 @@ export default function Dashboard() {
   const [triggerReload, setTriggerReload] = useState(false);
   const [form] = Form.useForm();
   const [loadingRequest, setLoadingRequest] = useState(false);
-
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(localStorage.getItem('userdata') != 'admin'){
+      navigate('/login');
+    }
+  },[])
   const forceReload = () => {
     setTriggerReload((prev) => !prev); // Toggle the state to trigger re-render
   };
@@ -191,7 +197,7 @@ export default function Dashboard() {
         </header>
 
         <section className="content w-full px-[50px] grid grid-cols-12  gap-3">
-          <div className="w-full flex items-center justify-center gap-3 flex-wrap col-span-12">
+          {/* <div className="w-full flex items-center justify-center gap-3 flex-wrap col-span-12">
             <div className="w-[300px]">
               <img className="w-full h-full" src={icon} alt="" />
             </div>
@@ -200,7 +206,7 @@ export default function Dashboard() {
 
               (สำหรับเทสเท่านั้น)
             </button>
-          </div>
+          </div> */}
 
           <DynamicTable reload={triggerReload} />
         </section>
