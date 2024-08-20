@@ -36,7 +36,7 @@ const { Column } = Table;
 const { TextArea } = Input;
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 15000,
 });
 
@@ -180,7 +180,7 @@ export default function DynamicTable({ reload }) {
   };
 
   async function getData() {
-    const result = await requestHandler(api.get("api/tasks"), {
+    const result = await requestHandler(api.get("form/get/donate"), {
       showNotifySuccess: false,
       successText: () => "Fetched",
     });
@@ -276,8 +276,8 @@ export default function DynamicTable({ reload }) {
     dataSource?.length > 0
       ? dataSource.filter(
           (task) =>
-            task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            task.detail.toLowerCase().includes(searchQuery.toLowerCase())
+            task.contact_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            task.organization_name.toLowerCase().includes(searchQuery.toLowerCase())
         )
       : [];
 
@@ -323,6 +323,9 @@ export default function DynamicTable({ reload }) {
             items={filteredTasks.map((i) => i.row_id)}
             strategy={verticalListSortingStrategy}
           >
+            {
+              console.log(filteredTasks)
+            }
             <Table
               rowKey="row_id"
               size="middle"
@@ -354,21 +357,29 @@ export default function DynamicTable({ reload }) {
                 )}
               />
               <Column
-                title="Start Date"
-                dataIndex="startdate"
-                key="startdate"
+                title="ยอดบริจาค"
+                dataIndex="donate_total"
+                key="donate_total"
+                render={(value, record) => (
+                  <Input value={value} />
+                )}
+              />
+              <Column
+                title="วันที่ลงทะเบียน"
+                dataIndex="record_time"
+                key="record_time"
                 render={(value) => (
                   <> {dayjs(value).format("YYYY-MM-DD HH:mm:ss")} </>
                 )}
               />
-              <Column
+              {/* <Column
                 title="End Date"
                 dataIndex="enddate"
                 key="enddate"
                 render={(value) => (
                   <> {dayjs(value).format("YYYY-MM-DD HH:mm:ss")} </>
                 )}
-              />
+              /> */}
 
               <Column
                 title="Action"

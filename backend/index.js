@@ -6,6 +6,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs'
 
+import functions from 'firebase-functions'
+import firebaseFunction from 'firebase-functions/v2';
+
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -70,9 +75,10 @@ app.use(bodyParser.json())
 app.use('/api',taskRouter);
 app.use('/form',donate);
 
-const port = process.env.PORT || 8080;
-const server = app.listen(port, () => {
-    console.log(`start at  http://localhost:${port}`)
-})
+// const port = process.env.PORT || 8445;
+// const server = app.listen(port, () => {
+//     console.log(`start at  http://localhost:${port}`)
+// })
 
 
+export default functions.https.onRequest(app)

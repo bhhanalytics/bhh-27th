@@ -213,7 +213,6 @@ export default function DonateForm(){
                                     <img src={treeimg} width="300px"  />
                                 </div>
                             </div>
-
                             <Divider />
                             <Title level={5} style={{paddingTop:'10px'}} >แบบฟอร์มแจ้งความจำนงค์บริจาคเพื่อปลูกป่าชายเลน </Title>
                             <p> ร่วมกันปลูกป่าชายเลน หรือ บริจาค 1 บาท = ต้นกล้า1ต้น = คาร์บอนครดิต 9.5  tCO2eq เท่ากับเราได้ออกซิเจนต่อมนุษย์ถึง 2 คน </p>
