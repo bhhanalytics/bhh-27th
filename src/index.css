@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 *{
   font-family: "Open Sans", sans-serif;
   /* font-family: "Itim", cursive; */
@@ -226,8 +227,8 @@ button:focus-visible {
 
 
 .plant {
-  background-color: #34db74aa;
-  color: white;
+  background-color: #dbf2e3;
+  color: rgb(0, 0, 0);
   font-size: 20px;
   border-radius: 50%;
   padding: 10px;
@@ -237,8 +238,8 @@ button:focus-visible {
 }
 
 .carbon {
-  background-color: #3498db;
-  color: white;
+  background-color: #a3bcf4;
+  color: rgb(0, 0, 0);
   font-size: 20px;
   border-radius: 50%;
   padding: 10px;
