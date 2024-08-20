@@ -7,6 +7,9 @@
     "host": "vite --host",
     "dev": "vite",
     "build": "vite build",
+    "deploy": "vite build --mode prod && firebase deploy --only hosting",
+    "deploy-all": "vite build --mode prod && firebase deploy --only hosting && firebase deploy --only functions",
+    "fa": "firebase logout && firebase login",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

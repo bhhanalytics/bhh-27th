@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom'
 const randInt = (min, max) => Math.random() * (max - min) + min;
 
 //* Test variable 
-const MAX_TREES = 1000; // Set your maximum limit here
+const MAX_TREES = 1; // Set your maximum limit here
 const TICK = 1000;
 //*
 

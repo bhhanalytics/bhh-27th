@@ -21,7 +21,7 @@ export default function Forest({ trees }) {
   
     // Function to generate random number in a range
   return (
-    <section className="w-full">
+    <section className="w-full hidden sm:block">
       <div className="land">
         <div className="relative w-full">
 
@@ -47,10 +47,6 @@ export default function Forest({ trees }) {
           svgHeight={svgSize.height}
           size={2}
           />
-          
-
-
-
 
         { trees.map((item)=> item)}
 

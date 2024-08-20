@@ -11,3 +11,5 @@
 # Todo list 📝
 
 # Change Log  🔁
+### 20240820.v1.0.0
+- Init project

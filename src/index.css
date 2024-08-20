@@ -10,6 +10,9 @@
   /* font-family: "Itim", cursive; */
 }
 
+html{
+  scroll-behavior: smooth;
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -246,5 +249,24 @@ button:focus-visible {
   transition: transform 0.3s ease;
   width:  300px; /* Ensures a minimum size */
   height: 300px;
-  transform: scale(.7);
+  transform: scale(.6);
+}
+.circle-1{
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 50px;
+  right: -70px;
+  background: #dbf2e3;
+  border-radius: 50%;
+}
+
+.circle-2{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 300px;
+  left: 0;
+  background: #dbf2e3;
+  border-radius: 50%;
 }
