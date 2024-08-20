@@ -11,8 +11,10 @@
 # Todo list 📝
 
 # Change Log  🔁
-### 20240820.v1.0.0
-- Init project
+
+### 20240820.v1.1.1
+- Change Version
+- Comment backend server
 
 ### 20240820.v1.1.0
 - Add tree loader 
@@ -22,3 +24,6 @@
 - Add Mermaid
 - Add QR Code
 - Fetch Data to display in marquee
+
+### 20240820.v1.0.0
+- Init project
