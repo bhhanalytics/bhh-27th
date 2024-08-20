@@ -50,10 +50,11 @@ function App() {
 
   return (
     <>
+      <div className='absolute text-black right-2 top-2'> {import.meta.env.VITE_VERSION} </div>
       <main className=' bg-white text-black w-full min-h-screen flex items-center justify-start flex-col gap-2'>
         {/*  <header className='w-full flex items-center p-5 border-b'>
           <ul>
-            <li></li>
+            <li className='text-black text-[.6rem]'>  </li>
           </ul>
         </header> */}
         <div className="bg-cover"></div>

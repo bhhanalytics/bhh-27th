@@ -16,7 +16,7 @@ export default function Summary({ treeCount }) {
            
 
             <SummaryItem 
-            className={'carbon'} icon={<Icon icon="material-symbols:co2-rounded" width="6rem" height="6rem" viewBox='0 0 22 22' /> } value={Math.round(totalTrees*9.5)} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> tCO<sub>2</sub>eq </>} />
+            className={'carbon'} icon={<Icon icon="material-symbols:co2-rounded" width="6rem" height="4rem" viewBox='0 0 22 22' /> } value={Math.round(totalTrees*9.5)} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> tCO<sub>2</sub>eq </>} />
 
     </section>
   )
