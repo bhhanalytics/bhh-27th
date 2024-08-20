@@ -9,7 +9,7 @@ export default function Summary({ treeCount }) {
   },[treeCount])
 
   return (
-    <section className='w-full md:w-2/4 grid grid-cols-12 relative  mt-[100px] text-black p-5 items-center justify-center pb-[500px]  justify-items-center'>
+    <section className='w-full md:w-2/4 grid grid-cols-12 relative mt-[50px] text-black p-5 items-center justify-center pb-[100px]  justify-items-center'>
 
           {/*   <SummaryItem icon={ <Icon icon="ph:trend-up" />} value={2030230232} subtitile={"ยอดบริจาค"} postfix={'บาท'}  className={'md:col-span-12'} /> */}
             <SummaryItem className={'plant'} icon={ <Icon icon="ph:plant-fill"  />}  value={totalTrees} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
