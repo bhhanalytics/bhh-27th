@@ -9,7 +9,7 @@ const Crab = React.memo(({ className, size, svgWidth, svgHeight }) => {
   
     const getRandomPosition = () => ({
       x: randInt(0,90),
-      y: randInt(1,-6)
+      y: randInt(7,-2)
     });
   
     useEffect(() => {

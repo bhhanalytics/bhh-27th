@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useRef} from "react";
 import backgroundImage from "../assets/img/forest/floor.svg"; // Import your background image
-import land from "../assets/img/forest/land14.svg"; // Import your background image
+import land from "../assets/img/forest/land16.svg"; // Import your background image
 import underWater from "../assets/img/forest/underwater.svg";
 import Tree from "./Tree";
 import Crab from "./Crab";
@@ -21,13 +21,13 @@ export default function Forest({ trees }) {
   
     // Function to generate random number in a range
   return (
-    <section className="w-full hidden sm:block">
+    <section className="w-full ">
       <div className="land">
         <div className="relative w-full">
 
           <svg
             ref={svgRef}
-            className="island overflow-visible relative"
+            className="island overflow-visible relative hidden sm:block"
             width="100%"
             height="100%"
             viewBox="0 0 100 100"
@@ -38,7 +38,7 @@ export default function Forest({ trees }) {
                 width="100"
                 height="100"
                 x="0"
-                y="-50"
+                y="-46"
                 href={land} // Ensure that 'land' is a valid URL or path to the image
             />
    
@@ -48,13 +48,14 @@ export default function Forest({ trees }) {
           size={2}
           />
 
-        { trees.map((item)=> item)}
+        { trees.map((item,i)=> <Tree {...item} key={`t-${i}`}/>)}
 
           </svg>
         </div>
-        <div className="relative pt-[500px]">
+        <div className="relative pt-[500px] w-full flex items-center justify-center">
           <img className="driver" src={underWater} alt="" />
         </div>
+        
       </div>
     </section>
   );
