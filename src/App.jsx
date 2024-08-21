@@ -28,50 +28,8 @@ import {
 } from "antd";
 import { Link } from 'react-router-dom'
 import { requestHandler } from './lib/handler'
-
-/* const reviews = [
-  {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
-  },
-  {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
-  },
-  {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
-  },
-  {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
-  },
-  {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
-  },
-  {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
-  },
-];
-
-*/
-
-
-
+import Version from './components/Version'
+import Console from './components/dev/Console'
 
 const ReviewCard = ({
   organization_name,
@@ -94,14 +52,13 @@ const ReviewCard = ({
           <figcaption className="text-sm font-medium dark:text-white">
             {organization_name || contact_name}
           </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">สนับสนุนต้นไม้ <span className='text-yellow-600'>{Number(donate_total).toLocaleString()}</span> ต้น</p>
+         {/*  <p className="text-xs font-medium dark:text-white/40">สนับสนุนต้นไม้ <span className='text-yellow-600'>{Number(donate_total).toLocaleString()}</span> ต้น</p> */}
         </div>
       </div>
       {/* <blockquote className="mt-2 text-sm">{donate_total}</blockquote> */}
     </figure>
   );
 };
-
 
 
 const randInt = (min, max) => Math.random() * (max - min) + min;
@@ -112,12 +69,18 @@ const TICK = 100;
 //*
 
 function App() {
+  const [logs, setLogs] = useState([]);
+
+  const addLog = (message) => {
+    setLogs((prevLogs) => [...prevLogs, message]);
+  };
 
   const [donators , setDonators] = useState([])
   const [trees, setTrees] = useState([]);
   const [firstRow , setFirstRow] = useState([])
   const [secondRow , setSecondRow] = useState([])
-
+  const [donateTotal , setDonateTotal] = useState(0)
+  const [carbonTotal , setCarbonTotal] = useState(0)
 
   async function getData() {
     const result = await requestHandler(api.get("api/donate"), {
@@ -126,34 +89,55 @@ function App() {
     });
     console.log(result);
     setDonators(result.data)
-    
+
+    const totalDonate = result.data.reduce((total, item) => {
+      return total + Number(item.donate_total);
+    }, 0);
+
+    setDonateTotal(totalDonate)
+    setCarbonTotal(totalDonate*9.5)
   }
   
   useEffect(()=>{
-    setFirstRow(donators.slice(0, donators.length / 2))
-    setSecondRow(donators.slice(donators.length / 2))
-
+    if(donators?.length > 0){
+      setFirstRow(  donators.length > 0 ? donators.slice(0, donators.length / 2 ) : [])
+      setSecondRow( donators.length > 0 ? donators.slice(donators.length / 2 ) : [])
+    }
+      
   },[donators])
 
 
   useEffect(() => {
-    let intervalId = setInterval(() => {
+    let i = 0;
+    const intervalId = setInterval(() => {
       setTrees(prevTrees => {
         let newTrees = [...prevTrees];
-
+        
         if (newTrees.length >= MAX_TREES) {
-          newTrees.shift()
+          newTrees[0] = { ...newTrees[0], isHidden: true }; 
 
+          setTimeout(() => {
+            console.log('DEL');
+            setTrees(currentTrees => {
+              return currentTrees.slice(1);
+            });
+          }, 3000);
         }
 
-        return [
-          ...newTrees,
-          <Tree className={'tree-plant'} x={randInt(0, 90)} y={randInt(-7, -2)} />
-        ];
+        let treeProp = {
+          x: randInt(0, 90),
+          y: randInt(-7, -2),
+          treeId: i,
+          treeSet: prevTrees,
+          isHidden: false
+        };
+
+        return [...newTrees, treeProp]; 
       });
+      i++;
     }, TICK);
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId); // Clear the interval on component unmount
   }, []);
 
   const [loading, setLoading] = useState(false)
@@ -179,12 +163,19 @@ function App() {
       </div>
 
       <Space direction="vertical" align="center" className='absolute right-2 top-2'>
-        <span>ร่วมสนับสนุนได้ที่</span>
+        <Link to={'/form'} className='hidden sm:block'>
           <QRCode value={'https://anniversarybangkokhatyai.web.app/form'} 
           size={120} errorLevel="H" />
+          <span className='text-black underline w-full text-center'>ร่วมสนับสนุนได้ที่</span>
+          </Link>
+
+          <Link to={'/form'} className='block sm:hidden'>
+          <span className='text-black underline w-full text-center'>ร่วมสนับสนุนได้ที่นี่</span>
+          </Link>
       </Space>
+      
       <div className='absolute left-2 top-2'>
-          <span className='text-[.6rem]'>{import.meta.env.VITE_VERSION}</span>
+          <Version/>
       </div>
 
       <Meteors number={30} />
@@ -204,19 +195,19 @@ function App() {
           </div>
 
           {/* Summary */}
-          <Summary treeCount={trees.length} />
+          <Summary tree={donateTotal} carbon={carbonTotal}  />
 
 
           {/* Marquee Logo */}
           <div className="relative flex w-full flex-col items-center h-[550px] justify-start overflow-hidden rounded-lg ">
             <Marquee pauseOnHover className="[--duration:20s]">
               {firstRow.map((review) => (
-                <ReviewCard key={review?.organization_name} {...review} />
+                <ReviewCard key={review?.row_id} {...review} />
               ))}
             </Marquee>
             <Marquee reverse pauseOnHover className="[--duration:20s]">
               {secondRow.map((review) => (
-                <ReviewCard key={review?.organization_name} {...review} />
+                <ReviewCard key={review?.row_id} {...review} />
               ))}
             </Marquee>
 
@@ -226,6 +217,8 @@ function App() {
 
           <Forest trees={trees} />
         </div>
+
+        {/* <Console logs={logs} addLog={addLog} /> */}
       </main>
     </>
   )

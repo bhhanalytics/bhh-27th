@@ -12,6 +12,11 @@
 
 # Change Log  🔁
 
+### 2024082ๅ.v1.1.2
+- Qr to button in mobile
+- Adjust hidden logic
+   
+
 ### 20240820.v1.1.1
 - Change Version
 - Comment backend server

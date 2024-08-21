@@ -1,12 +1,14 @@
 {
   "name": "bhh-27th",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.1.2",
   "type": "module",
   "scripts": {
+    "full-dev": "concurrently \"vite --mode dev\" \"cd backend && npm run server\"",
     "host": "vite --host",
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --mode dev",
+    "prod": "vite --mode prod",
+    "build": "vite build --mode prod",
     "deploy": "vite build --mode prod && firebase deploy --only hosting",
     "deploy-all": "vite build --mode prod && firebase deploy --only hosting && firebase deploy --only functions",
     "fa": "firebase logout && firebase login",
@@ -46,12 +48,14 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.7",
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

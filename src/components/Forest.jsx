@@ -48,7 +48,7 @@ export default function Forest({ trees }) {
           size={2}
           />
 
-        { trees.map((item)=> item)}
+        { trees.map((item,i)=> <Tree {...item} key={`t-${i}`}/>)}
 
           </svg>
         </div>

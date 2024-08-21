@@ -35,7 +35,7 @@ async function connectToDB(query = "") {
   try {
 
     await client.connect();
-    console.log("Connected to the Tasks DB");
+    console.log("Connected to the DB");
     const result = await client.query(query);
 
     return result.rows;

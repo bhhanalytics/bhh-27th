@@ -74,11 +74,14 @@ app.use(bodyParser.json())
 
 app.use('/api',apiRounter);
 app.use('/form',donate);
-/* 
- const port = process.env.PORT || 8080;
- const server = app.listen(port, () => {
-     console.log(`start at  http://localhost:${port}`)
- })
- */
+
+console.log("Running on "+process.env.NODE_ENV);
+
+if(process.env.NODE_ENV == 'dev'){
+    const port = process.env.PORT || 8080;
+    const server = app.listen(port, () => {
+        console.log(`start at  http://localhost:${port}`)
+    })
+}
 
 export default functions.https.onRequest(app)
