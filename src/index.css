@@ -345,6 +345,7 @@ button:focus-visible {
 .form-img-bg{
   background: url('./assets/img/Mesa de trabajo 1.png') no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 
@@ -388,4 +389,34 @@ button:focus-visible {
   left: 0;
   background: #dbf2e3;
   border-radius: 50%;
+}
+
+.thank-card{
+  border-radius: 25px;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.custom-button-icon {
+  color: #ffffff !important; /* Use !important to override any inline styles */
+}
+
+.custom-button {
+  border: 4px solid #ffffff; /* Default border color */
+  width: 100%;
+  font-size: 18px;
+  border-radius: 50px;
+  background-color: #ffffff;
+  padding: 5px;
+  color:#000000;
+}
+
+.custom-button:hover {
+  border: 2px solid #7c9d41; /* Border color on hover */
+  background-color: #f3f3c1 ;
+  color: #7c9d41 ;
+}
+
+.custom-button:focus{
+  border: 2px solid #7c9d41;
 }

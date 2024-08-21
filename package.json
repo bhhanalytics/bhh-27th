@@ -27,6 +27,7 @@
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.12",
     "env-cmd": "^10.1.0",
+    "html-to-image": "^1.11.11",
     "framer-motion": "^11.3.28",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
