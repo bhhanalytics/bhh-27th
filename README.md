@@ -12,9 +12,11 @@
 
 # Change Log  🔁
 
+### 20240822.v1.1.5
+- Show New donator
+  
 ### 20240822.v1.1.4
 - Add Marquee logic
-
 
 ### 20240822.v1.1.3
 - Fix base_url for api

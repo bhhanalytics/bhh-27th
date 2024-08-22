@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react';
 import NumberCounter from './NumberCounter';
 import NumberTicker from "@/components/magicui/number-ticker";
+import { BorderBeam } from "@/components/magicui/border-beam";
 
 export default function Summary({ tree , carbon }) {
 /*   const [totalTrees , setTotalTrees] = useState(0)
@@ -10,18 +11,18 @@ export default function Summary({ tree , carbon }) {
   },[treeCount]) */
 
   return (
-    <section className='w-full md:w-2/4 grid grid-cols-12 relative mt-[50px] text-black p-5 items-center justify-center pb-[100px]  justify-items-center'>
+    <section className='transition duration-500 ease-in-out transform hover:scale-110 w-full md:w-2/4 grid grid-cols-12 relative mt-[50px] text-black p-5 items-center justify-center pb-[100px]  justify-items-center'>
 
           {/*   <SummaryItem icon={ <Icon icon="ph:trend-up" />} value={2030230232} subtitile={"ยอดบริจาค"} postfix={'บาท'}  className={'md:col-span-12'} /> */}
-            <SummaryItem className={'plant'} icon={ <Icon icon="ph:plant-fill"  />}  value={tree} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
-            <SummaryItem 
+            <SummaryItem colorFrom={'#58eeac'} colorTo={'#77f132'} className={'plant'} icon={ <Icon icon="ph:plant-fill"  />}  value={tree} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
+            <SummaryItem colorFrom={'#5869ee'} colorTo={'#32cbf1'}
             className={'carbon'} icon={<Icon icon="material-symbols:co2-rounded" width="6rem" height="4rem" viewBox='0 0 22 22' /> } value={carbon} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> tCO<sub>2</sub>eq </>} />
 
     </section>
   )
 }
 
-const SummaryItem = ({ value , subtitile , icon , postfix , className  }) =>{
+const SummaryItem = ({ value , subtitile , icon , postfix , className , colorFrom ,colorTo  }) =>{
 
     
   const numberBreakpoint = {
@@ -57,6 +58,7 @@ const SummaryItem = ({ value , subtitile , icon , postfix , className  }) =>{
                             </div>
                     <div className="sub-title text-center"> {subtitile}  </div>
             </div>
+            <BorderBeam colorFrom={colorFrom} colorTo={colorTo} borderWidth={2} />
         </div>
     )
 }

@@ -355,8 +355,36 @@ function App() {
     }
   }, [donators])
 
+  useEffect(()=>{
+    if(donators.length > 0){
 
-  useEffect(() => {
+    setTrees(prevTrees => {
+      let newTrees = [...prevTrees];
+
+      if (newTrees.length >= MAX_TREES) {
+        newTrees[0] = { ...newTrees[0], isHidden: true };
+
+        setTimeout(() => {
+          console.log('DEL');
+          setTrees(currentTrees => {
+            return currentTrees.slice(1);
+          });
+        }, 3000);
+      }
+      let treeProp = {
+        x: randInt(0, 90),
+        y: randInt(-7, -2),
+        treeSet: prevTrees,
+        isHidden: false
+      };
+
+      return [...newTrees, treeProp];
+    });
+  }
+
+  },[donators])
+  
+/*   useEffect(() => {
     let i = 0;
     const intervalId = setInterval(() => {
       setTrees(prevTrees => {
@@ -372,7 +400,6 @@ function App() {
             });
           }, 3000);
         }
-
         let treeProp = {
           x: randInt(0, 90),
           y: randInt(-7, -2),
@@ -386,8 +413,8 @@ function App() {
       i++;
     }, TICK);
 
-    return () => clearInterval(intervalId); // Clear the interval on component unmount
-  }, []);
+    return () => clearInterval(intervalId); 
+  }, []); */
 
   const [loading, setLoading] = useState(false)
 
@@ -444,14 +471,10 @@ function App() {
 
 
           {/* Marquee Logo */}
-          {newDonator.row_id ?
+          {newDonator.row_id &&
                 <div className='w-full flex items-center justify-center mb-2'>
                   <ReviewCard isNew={true} key={'new-'+newDonator?.row_id} {...newDonator} />
                 </div>
-                :
-                <div className='w-full flex items-center justify-center mb-2'>
-                <ReviewCard isNew={true} key={'new-'+newDonator?.row_id} {...newDonator} isEmpty={true} titleNew={'รอตังอยู่นะจ้ะ'} />
-              </div>
               }
 
           {donators.length <= 4 ?

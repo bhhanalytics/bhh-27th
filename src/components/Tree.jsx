@@ -28,7 +28,7 @@ const Tree = ({ className = '', x, y, size , treeId , isHidden}) => {
   }, []); 
 
   return (
-    <svg key={id} data-treeid={treeId}  width="10" height="10" x={x} y={y} viewBox="0 0 155 217"
+    <svg key={id} data-treeid={id}  width="10" height="10" x={x} y={y} viewBox="0 0 155 217"
     fill="none" xmlns="http://www.w3.org/2000/svg"
     className={`${isHidden ?  "tree-down" : "tree-plant"} ${className}`}>
 
