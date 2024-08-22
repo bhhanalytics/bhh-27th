@@ -10,6 +10,15 @@ import axios from "axios";
 import pg from "pg";
 import dayjs from "dayjs";
 import multer from "multer";
+import admin from 'firebase-admin';
+
+
+admin.initializeApp({
+  credential: admin.credential.cert('./anniversarybangkokhatyai-firebase-adminsdk-kt41r-22fd57775e.json'),
+  databaseURL: "https://anniversarybangkokhatyai-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
+
+const db = admin.database();
 
 const donate = express.Router();
 dotenv.config();
@@ -81,13 +90,43 @@ const upload = multer({ storage: storage });
 // });
 
 donate.get("/hello", async (req, res) => {
-    const query=`select *  from donate_list `
+    // const query=`select *  from donate_list `
     try {
         const result = await connectToDB(query);
         res.status(200).json({ success: true,data:[{id:3}]});
     } catch (error) {
         res.status(500).json({ error: "Error on add task " + error });
     }
+});
+
+donate.post('/insert/data', async (req, res) => {
+  try {
+    const input = req.body;
+    // const user = {
+    //   name: 'John Doe',
+    //   email: 'johndoe@example.com'
+    // };
+    
+    const ref = db.ref('donate').push();
+    await ref.set(input);
+    res.status(200).json({ id: ref.key });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+donate.get('/get/data', async (req, res) => {
+  try {
+    const snapshot = await db.ref('donate').once('value');
+    if (snapshot.exists()) {
+      const data = Object.values(snapshot.val());
+      res.status(200).json({success:true,data:data})
+    } else {
+      res.status(404).json({ error: 'Data not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 donate.post('/insert/donate',async(req,res)=>{
@@ -99,6 +138,8 @@ donate.post('/insert/donate',async(req,res)=>{
     VALUES( '${input.organization_name}', '${input.organization_address}', '${input.organization_phone}', '${input.donate_total}', '${input.contact_name}', '${input.contact_phone}', '${input.contact_email}', '${input.donate_type}', false , false, now() , true ) `;
     try{
         const result = await connectToDB(query_organization);
+        const ref = db.ref('donate').push();
+        await ref.set(input);
         // res.status(200).json({ success: true,data:result});
 
         res.status(200).json({ success: true});

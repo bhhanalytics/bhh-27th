@@ -101,6 +101,7 @@ html{
 #root{
   width: 100%;
   background: rgb(85, 179, 227);
+  overflow-x: hidden;
 
 }
 
@@ -346,6 +347,7 @@ button:focus-visible {
   background: url('./assets/img/Mesa de trabajo 1.png') no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  min-width: 400px;
 }
 
 
@@ -409,6 +411,7 @@ button:focus-visible {
   background-color: #ffffff;
   padding: 5px;
   color:#000000;
+  margin:0
 }
 
 .custom-button:hover {
@@ -420,3 +423,16 @@ button:focus-visible {
 .custom-button:focus{
   border: 2px solid #7c9d41;
 }
+
+.custom-button:active{
+  border: 2px solid #7c9d41;
+}
+
+.zoomed-element {
+  /* width: 100%; 
+  max-width: 100%;
+  object-fit: cover; 
+  overflow-x: hidden; */
+}
+
+
