@@ -14,7 +14,7 @@ import admin from 'firebase-admin';
 
 
 admin.initializeApp({
-  credential: admin.credential.cert('./anniversarybangkokhatyai-firebase-adminsdk-kt41r-22fd57775e.json'),
+  credential: admin.credential.cert('./key.json'),
   databaseURL: "https://anniversarybangkokhatyai-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
 
