@@ -191,7 +191,7 @@ export default function DonateForm(){
         <>
 
             <div  
-                className=' text-black w-full min-h-screen flex items-center justify-start flex-col gap-2 form-img-bg ' 
+                className=' text-black w-full min-h-screen flex items-center justify-start flex-col gap-2 form-img-bg zoomed-element ' 
                 style={{
                     // backgroundColor:'#478018'
                 }}
@@ -383,7 +383,9 @@ export default function DonateForm(){
                             <ThankCard data={allValues} />
                         </Col>
                 }
-
+                        {/* <Col span={24} style={{display:'flex',justifyContent:'center',marginTop:'10px',position:'inherit'}}>
+                            <ThankCard data={allValues} />
+                        </Col> */}
                 </Row>
                 <div 
                     style={ 

@@ -10,7 +10,6 @@ import functions from 'firebase-functions'
 import firebaseFunction from 'firebase-functions/v2';
 
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

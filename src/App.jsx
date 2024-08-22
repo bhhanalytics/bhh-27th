@@ -19,7 +19,7 @@ import axios from 'axios'
 import tree from './assets/img/forest/tree.svg'
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 15000,
 });
 
@@ -65,7 +65,7 @@ const randInt = (min, max) => Math.random() * (max - min) + min;
 
 //* Test variable 
 const MAX_TREES = 100; // Set your maximum limit here
-const TICK = 100;
+const TICK = 5000;
 //*
 
 function App() {

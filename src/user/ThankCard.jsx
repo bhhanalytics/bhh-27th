@@ -43,13 +43,15 @@ export default function ThankCard(props){
                             // boxShadow:' rgba(99, 99, 99, 0.1) 2px 2px 10px 2px',
                             marginTop:'2em',
                             // minHeight:'300px',
-                            // minWidth:'375px',
-                            textAlign:'center'
-                            
+                            textAlign:'center',
                         }}>
-                <Col span={24}  style={{backgroundColor:'rgba(250,250,0,0.0)',paddingTop:'20px',paddingBottom:'20px'}} ref={cardRef}>
+                <Col span={24}  style={{backgroundColor:'rgba(250,250,0,0.0)',paddingTop:'20px',paddingBottom:'20px'}} >
                     <Card
                         className="thank-card"
+                        style={{                            
+
+                            margin:'auto'
+                        }}
                     >
                         <Row>
                             {/* <Col span={24} >   
@@ -105,9 +107,69 @@ export default function ThankCard(props){
                         บันทึกการ์ด
                     </button>
                 </Col>
+                {/* --------Card Download------- */}
+                <Col span={24}  style={{backgroundColor:'rgba(250,250,0,0.0)',paddingTop:'20px',paddingBottom:'20px'}}     >
+                    <Card
+                        className="thank-card"
+                        style={{                            
+                            maxWidth:'350px',
+                            minWidth:'350px',
+                            zIndex:-1
+                        }}
+                        ref={cardRef}
+                        
+                    >
+                        <Row>
+                            {/* <Col span={24} >   
+                                <Title level={3} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#133C7B'}}>โครงการกล้าดีพิทักษ์สิ่งแวดล้อม</Title>
+                            </Col> */}
+                            <Col span={24} >
+                                <div className="icon-set flex gap-5 w-full items-center justify-center "> 
+                                        <div className="w-full max-w-[100px]">
+                                            <img src={bhh27Icon} className='object-contain w-full h-full mt-4 mb-4' alt="bhh27icon" />
+                                        </div>
+                                        <div className="w-full max-w-[100px]">
+                                            <img src={gw} className='object-contain mt-4 mb-4' alt="bhh27icon" />
+                                        </div>
 
+                                </div>
+                            </Col>
+                            <Col span={24}  >
+
+                                <div className="icon-set flex gap-5 w-full items-center justify-center">
+                                    <div className="w-full mt-10 flex item-center justify-center">
+                                        <img src={treeimg} width="200px"  />
+                                    </div>
+                                </div>
+                                
+                                <Divider/>
+                            </Col>
+                            <Col span={24} >
+                            <Title level={5} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#000',margin:'0px 0px 0px 0px'}}  >โรงพยาบาลกรุงเทพหาดใหญ่</Title>
+                                <Title level={5} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#000',margin:'0px 0px 15px 0px' }}  >ขอขอบคุณ</Title>
+                                {
+                                    data != null ?
+                                    <Text level={4} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#133C7B',textAlign:'center',fontSize:'1.3rem'}}>
+                                        {
+                                            data.organization_name != '' ?   data.organization_name : data.contact_name
+                                        }
+                                    </Text>
+                                    :
+                                    null
+                                }
+                                <Title level={5} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#000',textAlign:'center',margin:'20px 0px 0px 0px'}}>
+                                    สำหรับการร่วมสนับสนุน
+                                </Title>
+                                <Title level={5} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#000',textAlign:'center',margin:'0px'}}>
+                                    <span style={{fontWeight:'800',fontSize:'18px'}}>"โครงการกล้าดีพิทักษ์สิ่งแวดล้อม"</span> <br/>ต่อลมหายใจป่าชายเลน 
+                                </Title>
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
             </Row>
             
+
                
             
         </>
