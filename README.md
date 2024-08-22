@@ -12,6 +12,10 @@
 
 # Change Log  🔁
 
+
+### 20240822.v1.1.8
+- Fetch from firebase
+
 ### 20240822.v1.1.7
 - Add firebase-admin
 

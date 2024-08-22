@@ -1,7 +1,7 @@
 {
   "name": "bhh-27th",
   "private": true,
-  "version": "1.1.7",
+  "version": "1.1.8",
   "type": "module",
   "scripts": {
     "full-dev": "concurrently \"vite --mode dev\" \"cd backend && npm run server\"",
@@ -27,6 +27,7 @@
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.12",
     "env-cmd": "^10.1.0",
+    "firebase": "^10.13.0",
     "firebase-admin": "^12.3.1",
     "framer-motion": "^11.3.28",
     "html-to-image": "^1.11.11",
