@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react';
 import NumberCounter from './NumberCounter';
+import NumberTicker from "@/components/magicui/number-ticker";
 
 export default function Summary({ tree , carbon }) {
 /*   const [totalTrees , setTotalTrees] = useState(0)
@@ -34,10 +35,10 @@ const SummaryItem = ({ value , subtitile , icon , postfix , className  }) =>{
     return value >= +key ? textSize : acc;
   }, numberBreakpoint[0]);
 
-  value = typeof value === 'number' ? value.toLocaleString() : value;
+  /* value = typeof value === 'number' ? value.toLocaleString() : value; */
 
     return (
-        <div className={`item  ${className} relative md:col-span-6 h-fit col-span-12 flex  flex-col p-3 rounded-md items-center justify-center`}> 
+        <div className={`item select-none ${className} relative md:col-span-6 h-fit col-span-12 flex  flex-col p-3 rounded-md items-center justify-center`}> 
             {className === 'plant' && <>
               <div className='circle-1'></div>
               <div className='circle-2'></div>
@@ -45,8 +46,11 @@ const SummaryItem = ({ value , subtitile , icon , postfix , className  }) =>{
             <div className="icon px-2 flex items-center justify-center text-[3rem]"> {icon} </div>
             <div className="text flex flex-col z-50">
                     <div className={`value ${size} w-full `}> 
+
                             <div className='w-full flex justify-between items-end font-bold '> 
-                                <span> {value} </span>
+                                <span className='select-text'>{ value > 0 ? <NumberTicker value={value} /> : 0 } </span>
+                                
+
                                 <span className='text-[1rem]'> {postfix} </span>
                              </div> 
 

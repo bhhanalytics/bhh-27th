@@ -6,7 +6,6 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const Tree = ({ className = '', x, y, size , treeId , isHidden}) => {
   const id = useId()
 
-  console.log(isHidden , treeId);
  const [hiddenTree , setHiddenTree] = useState('tree-plant');
 
 /*   useEffect(() => {
