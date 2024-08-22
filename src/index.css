@@ -101,7 +101,7 @@ html{
 #root{
   width: 100%;
   background: rgb(85, 179, 227);
-  overflow-x: hidden;
+/*   overflow-x: hidden; */
 
 }
 
