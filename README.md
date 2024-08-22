@@ -12,7 +12,10 @@
 
 # Change Log  🔁
 
-### 2024082ๅ.v1.1.2
+### 20240822.v1.1.3
+- Fix base_url for api
+
+### 20240821.v1.1.2
 - Qr to button in mobile
 - Adjust hidden logic
    
