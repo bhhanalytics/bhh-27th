@@ -37,7 +37,8 @@ const api = axios.create({
 });
 
 // Allow all origins with all methods
-app.use(cors({ origin:['http://172.16.2.85:5173','http://127.0.0.1:5173','http://localhost:5173'] }));
+// app.use(cors({ origin:['http://172.16.2.85:5173','http://127.0.0.1:5173','http://localhost:5173'] }));
+app.use(cors());
 app.disable('x-powered-by');
 
 

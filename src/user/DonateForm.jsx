@@ -404,7 +404,7 @@ export default function DonateForm(){
                     style={ 
                         page === 1 ? 
                         {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%'} 
-                        : height < '1200'  ? 
+                        : height < '1080'  ? 
                             {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%'}
                             :
                             {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%',position:'fixed',bottom:0}}

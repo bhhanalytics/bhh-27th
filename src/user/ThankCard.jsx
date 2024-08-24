@@ -130,7 +130,10 @@ export default function ThankCard(props){
                         style={{                            
                             maxWidth:'350px',
                             minWidth:'350px',
-                            zIndex:-1
+                            zIndex:-1 ,
+                            position:'fixed',
+                            top:0
+                        
                         }}
                         ref={cardRef}
                         
