@@ -107,14 +107,33 @@ export default function ThankCard(props){
                         บันทึกการ์ด
                     </button>
                 </Col>
+                <Col span={24} className="mt-5 ">
+                    {/* <button className="custom-button"  >
+                        ย้อนกลับ
+                    </button> */}
+                    <Button 
+                        type="primary" 
+                        shape="round" 
+                        style={{width:'100%',margin:0}} 
+                        size="large" 
+                        danger 
+                        onClick={()=>{props.setpage(0)}}
+                    >
+                        ย้อนกลับ
+                    </Button>
+                </Col>
+
                 {/* --------Card Download------- */}
-                <Col span={24}  style={{backgroundColor:'rgba(250,250,0,0.0)',paddingTop:'20px',paddingBottom:'20px'}}     >
+                <Col span={24}  style={{backgroundColor:'rgba(250,250,0,0.0)',paddingTop:'20px',paddingBottom:'20px'}} >
                     <Card
                         className="thank-card"
                         style={{                            
                             maxWidth:'350px',
                             minWidth:'350px',
-                            zIndex:-1
+                            zIndex:-1 ,
+                            position:'fixed',
+                            top:0
+                        
                         }}
                         ref={cardRef}
                         
@@ -163,10 +182,12 @@ export default function ThankCard(props){
                                 <Title level={5} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#000',textAlign:'center',margin:'0px'}}>
                                     <span style={{fontWeight:'800',fontSize:'18px'}}>"โครงการกล้าดีพิทักษ์สิ่งแวดล้อม"</span> <br/>ต่อลมหายใจป่าชายเลน 
                                 </Title>
+
                             </Col>
                         </Row>
                     </Card>
                 </Col>
+
             </Row>
             
 

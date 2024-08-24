@@ -120,11 +120,32 @@ donate.get('/get/data', async (req, res) => {
     const snapshot = await db.ref('donate').once('value');
     if (snapshot.exists()) {
       const data = Object.values(snapshot.val());
-      res.status(200).json({success:true,data:data})
+      res.status(200).json({success:true,data:data});
+     
     } else {
       res.status(404).json({ error: 'Data not found' });
     }
   } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+donate.post('/search/data', async (req, res) => {
+  const input = req.body;
+  console.log('input : '+input.value)
+  try {
+    const snapshot = await db.ref('donate').once('value');
+    if (snapshot.exists()) {
+      const data = Object.values(snapshot.val());
+      var filterdata = data.filter(data=> data.organization_name.toLowerCase().includes(input.value.toLowerCase()) || data.contact_name.toLowerCase().includes(input.value.toLowerCase()) );
+
+      res.status(200).json({success:true,data:filterdata});
+
+    } else {
+      res.status(404).json({ error: 'Data not found' });
+    }
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
