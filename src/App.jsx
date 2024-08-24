@@ -19,11 +19,13 @@ import axios from 'axios'
 import tree from './assets/img/forest/tree.svg'
 import { BorderBeam } from "@/components/magicui/border-beam";
 import WordRotate from "@/components/magicui/word-rotate";
-
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 15000,
 });
+
+import { ref, onValue ,get } from "firebase/database";
+import { database } from "./config/firebaseDatabaseConfig";
 
 const propData = [
   {
@@ -307,6 +309,46 @@ function App() {
   },[]) */
 
   useEffect(() => {
+    const userRef = ref(database, 'donate');
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log("User data:", data);
+      
+      if (data) {
+        Object.keys(data).forEach((key) => {
+          const newDonator = {
+            row_id: key,
+            ...data[key],
+          };
+          setDonators((prevDonators) => [...prevDonators, newDonator]);
+        });
+      } else {
+        setDonators([]);
+      }
+    });
+  }, []);
+
+/* useEffect(() => {
+  const fetchData = async () => {
+    const dataRef = ref(database, 'donate'); 
+    try {
+      const snapshot = await get(dataRef);
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        setDonators(snapshot.val());
+      } else {
+        console.log('No data available');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
+ */
+
+/*   useEffect(() => {
     let i = 0;
     const intervalId = setInterval(() => {
       if (i < propData.length) {
@@ -315,9 +357,10 @@ function App() {
       }
     }, TICK);
 
-    return () => clearInterval(intervalId); // Clear the interval on component unmount
+    return () => clearInterval(intervalId); 
   }, []);
-
+ */
+  // wait for next donator
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if(newDonator?.row_id){
@@ -328,6 +371,7 @@ function App() {
     return () => clearInterval(timeoutId); 
   }, [newDonator]);
 
+
   useEffect(() => {
     if (newDonator?.row_id) {
       setDonators((prev) => [...prev, newDonator])
@@ -335,14 +379,17 @@ function App() {
   }, [newDonator]);
 
   useEffect(() => {
-    const totalDonate = donators.reduce((total, item) => {
-      if (typeof item !== 'undefined') {
-        return total + Number(item.donate_total);
-      }
-    }, 0);
+    if(donators.length > 0){
 
-    setDonateTotal(totalDonate)
-    setCarbonTotal(totalDonate * 9.5)
+      const totalDonate = donators.reduce((total, item) => {
+        if (typeof item !== 'undefined') {
+          return total + Number(item.donate_total);
+        }
+      }, 0);
+      
+      setDonateTotal(totalDonate)
+      setCarbonTotal(totalDonate * 9.5)
+    }
 
   }, [donators])
 
@@ -416,6 +463,9 @@ function App() {
     return () => clearInterval(intervalId); 
   }, []); */
 
+  useEffect(()=>{
+    console.log(donators);
+  },[donators])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
