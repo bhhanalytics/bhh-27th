@@ -1,4 +1,4 @@
-import { Card, Col, Form, Row ,Typography,Tabs,Button, Input, Radio ,Flex,InputNumber, Divider } from "antd";
+import { Card, Col, Form, Row ,Typography,Tabs,Button, Input, Radio ,Flex,InputNumber, Divider,Select } from "antd";
 import { useState,useEffect } from "react";
 import bhh27Icon from '../assets/img/BHH27icon.png'
 import gw from '../assets/img/gw.png'
@@ -15,12 +15,19 @@ export default function DonateForm(){
     const [allValues,setallvalue] =useState({});
     const [loadingform,setLoadingform] = useState(false);
     const [page,setPage] = useState(0);
+    const [data,setData] = useState([]);
+    const [value, setValue] = useState();
     const [height, setHeight] = useState(window.innerHeight);
     const [form] = Form.useForm();
     const api_url = import.meta.env.VITE_BASE_URL;
   
+    useEffect(()=>{
+        fetchdonate(); 
+    },[])
+
 
     useEffect(() => {
+      
       const handleResize = () => {
         setHeight(window.innerHeight);
       };
@@ -31,7 +38,7 @@ export default function DonateForm(){
       return () => {
         window.removeEventListener('resize', handleResize);
       };
-    }, []);
+    }, [height]);
 
 
     const onFinish = async(values) => {
@@ -61,116 +68,71 @@ export default function DonateForm(){
         }
     };
 
-    // const FormType = ({ type }) => {
+    const fetchdonate = async (newValue)=>{
+        if(newValue !== '' && newValue !== undefined){
+            const response = await fetch(api_url+'/form/search/data',{
+                method:"POST",
+                headers: {
+                    Accept: "application/json",
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({value:newValue})
+               });
+    
+            if(response.status==200){
+                const json = await response.json();
+                var data = json.data;
+                
+                if(data.length !== 0){
+                   var newdata =  data.map((item)=>{
+                        if(item.organization_name !== ''){
+                            // var text = `${item.organization_name}(${item.contact_name})`
+                            return {
+                                value : item.organization_name,
+                                label : item.organization_name,
+                                organization_name : item.organization_name,
+                                contact_name : item.contact_name 
+                            }
+                        }else{
+                            return {
+                                value : item.contact_name,
+                                label : item.contact_name,
+                                organization_name : '',
+                                contact_name : item.contact_name 
+                            }
+                        }
+                    })
+                    setData(newdata);
+                }else{
+                    setData([]);
+                }
+                
+            }
+        }else{
+            setData([]);
+        }
+
+    }
+
+
+    const handleSearch = (newValue) => {
+        fetchdonate(newValue);
+    };
+
+    const handleChange = (newValue) => {
+        setValue(newValue);
+    };
+
+    const showCard = ()=>{
        
-        
-    //     const [allValues,setallvalue] =useState({});
-    //     const onFormChange = (value) => {
-    //        console.log(value)
-    //     };
-    
-   
-    
-    //     return (
-    //         <>
-    //             <Form
-    //                 form={form}
-    //                 layout="vertical"
-    //                 onFinish={onFinish}
-    //                 initialValues={{
-    //                     // donate_total: 0,
-    //                 }}
+        if(value !== undefined){
+            var isData = data.filter(data => data.value = value);
+            setallvalue(isData[0]);
+            setPage(2);
+            setValue(null);
+        }
 
-    //                 onValuesChange={(changedValues, allValues) => {
-    //                     setallvalue(allValues);
-    //                   }}
-    //                 style={{width:'90%'}}
-    //                 >
-    //                 {
-    //                     type == 0
-    //                     ?
-    //                     <>
-    //                         <Form.Item
-    //                             name="organization_name"
-    //                             label="ชื่อองค์กร"
-    //                             rules={[{ required: true, message: 'Please input the organization name!' }]}
-    //                         >
-    //                             <Input />
-    //                         </Form.Item>
-
-    //                         <Form.Item
-    //                             name="organization_address"
-    //                             label="ที่อยู่องค์กร(เพื่อออกจดหมายขอบคุณ) "
-    //                             rules={[{ required: true, message: 'Please input the organization address!' }]}
-    //                         >
-    //                             <Input />
-    //                         </Form.Item>
-
-    //                         <Form.Item
-    //                             name="organization_phone"
-    //                             label="หมายเลขโทรศัพท์องค์กร"
-    //                             rules={[{ required: true, message: 'Please input the organization phone number!' }]}
-    //                         >
-    //                             <Input />
-    //                         </Form.Item>
-    //                         </>
-    //                     : null
-    //                 }
-
-
-    //                 <Form.Item
-    //                     name="contact_name"
-    //                     label={type == 1 ?'ชื่อ-สกุลผู้ประสานงาน': 'ชื่อ-สกุล'}
-    //                     rules={[{ required: true, message: 'Please input the contact name!' }]}
-    //                 >
-    //                     <Input />
-    //                 </Form.Item>
-
-    //                 <Form.Item
-    //                     name="contact_phone"
-    //                     label={type == 1 ?'หมายเลขโทรศัพท์ผู้ประสานงาน': 'หมายเลขโทรศัพท์'}
-    //                     rules={[{ required: true, message: 'Please input the contact phone number!' }]}
-    //                 >
-    //                     <Input />
-    //                 </Form.Item>
-
-    //                 <Form.Item
-    //                     name="contact_email"
-    //                     label={type == 1 ?'E-mail ผู้ประสานงาน': 'E-mail'}
-    //                     rules={[
-    //                     { type: 'email', message: 'The input is not valid E-mail!' },
-    //                     { required: true, message: 'Please input the contact email!' },
-    //                     ]}
-    //                 >
-    //                     <Input />
-    //                 </Form.Item>
-
-    //                 <Form.Item
-    //                     name="donate_total"
-    //                     label="จำนวนยอดบริจาค (1 บาท = 1 ต้น)"
-    //                     rules={[{ required: true, message: 'Please input the donation total!' }]}
-    //                 >
-    //                     <InputNumber
-    //                         style={{ width: '100%' }}
-    //                         min={0}
-    //                         formatter={(value) => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-    //                         parser={(value) => value.replace(/\฿\s?|(,*)/g, '')}
-    //                     />
-    //                 </Form.Item>
-
-    //                 <Form.Item>
-                        
-    //                 </Form.Item>
-
-    //                 <Form.Item>
-    //                     <Button type="primary" htmlType="submit">
-    //                     Submit
-    //                     </Button>
-    //                 </Form.Item>
-    //                 </Form>
-    //         </>
-    //     );
-    // };
+    }
 
     const tabItems = [
         {
@@ -185,7 +147,7 @@ export default function DonateForm(){
             label: 'บุคคลทั่วไป',
             children: 'Content of Tab Pane 1',
         }
-    ]
+    ];
 
     return(
         <>
@@ -218,7 +180,6 @@ export default function DonateForm(){
                                     <div className="w-full max-w-[120px]">
                                         <img src={gw} className='object-contain mt-4 mb-4' alt="bhh27icon" />
                                     </div>
-
                                 </div>
                                 <div className="icon-set flex gap-5 w-full items-center justify-center "> 
                                     <div className="w-full mt-10 flex item-center justify-center">
@@ -251,13 +212,65 @@ export default function DonateForm(){
                                             </Title>
                                         </div>
                                     </>
-
                                 }
                                 {
                                     page === 0 ?
-                                    <div className="flex item-center justify-center my-5 ">
-                                        <Button type="primary" style={{width:'90%'}} onClick={()=>{setPage(1)}}  >ร่วมสนับสนุน</Button>
-                                    </div>
+                                    <>  
+                                        <Row>
+                                            {/* <Col span={24} className="flex item-center justify-center my-4" >
+                                                <Divider style={{margin:0}}/>
+                                             </Col> */}
+
+                                            <Col md={18} sm={18} xs={16} className="flex item-center justify-center mt-4 " >
+ 
+                                                    <Select
+                                                        showSearch
+                                                        value={value}
+                                                        placeholder="ค้นหาผู้ร่วมสนับสนุน(ชื่อองค์กร,ชื่อ-สกุล)"
+                                                        style={{width:'90%'}}
+                                                        defaultActiveFirstOption={false}
+                                                        suffixIcon={null}
+                                                        filterOption={false}
+                                                        onSearch={handleSearch}
+                                                        onChange={handleChange}
+                                                        // notFoundContent={null}
+                                                        options={data}
+                                                    /> 
+                                            </Col>
+                                            <Col md={6} sm={6} xs={8} className="flex item-center justify-center mt-4 " >
+                                                <Button type="primary" style={{width:'90%',margin:0}} onClick={()=>{showCard()}}  >ค้นหา</Button>
+                                            </Col>
+                                            {/* <Col span={24} className="flex item-center justify-center my-5 " >
+                                                <Select
+                                                    showSearch
+                                                    value={value}
+                                                    placeholder="ค้นหาผู้ร่วมสนับสนุน(ชื่อองค์กร,ชื่อ-สกุล)"
+                                                    style={{width:'90%'}}
+                                                    defaultActiveFirstOption={false}
+                                                    suffixIcon={null}
+                                                    filterOption={false}
+                                                    onSearch={handleSearch}
+                                                    onChange={handleChange}
+                                                    // notFoundContent={null}
+                                                    options={data}
+                                                />
+                                            </Col> */}
+                                            <Col span={24} >
+                                                <Divider ></Divider>
+                                            </Col>
+                                            <Col span={24} className="flex item-center justify-center ">
+                                                <Button type="primary" style={{width:'100%'}} onClick={()=>{setPage(1)}}  >ร่วมสนับสนุน</Button>
+                                            </Col>
+                                        </Row>
+                                        {/* <div className="flex item-center justify-center my-5 ">
+                                            <Button type="primary" style={{width:'90%'}} onClick={()=>{setPage(1)}}  >ร่วมสนับสนุน</Button>
+                                        </div>
+                                        <Divider style={{margin:'0px'}}/>
+                                        <div className="flex item-center justify-center my-5 ">
+
+                                            <Button type="primary" style={{width:'90%'}} onClick={()=>{setPage(1)}}  >ค้นหาผู้ร่วมสนับสนุนโครงการ</Button>
+                                        </div> */}
+                                    </>
                                     : 
                                     page === 1 ?
                                     <>
@@ -365,10 +378,13 @@ export default function DonateForm(){
                                         <Divider/>
                                         <Form.Item>
                                             <Button type="primary" htmlType="submit" loading={loadingform}>
-                                                {loadingform ? 'Submitting...' : 'Submit'}
+                                                {loadingform ? 'รอบันทึก...' : 'บันทึก'}
                                             </Button>
                                             <Button type="primary" style={{marginLeft:'10px'}} onClick={()=>{form.resetFields();}} ghost >
-                                                Clear
+                                                ล้าง
+                                            </Button>
+                                            <Button type="default" onClick={()=>{setPage(0)}} >
+                                                ย้อนกลับ
                                             </Button>
                                         </Form.Item>
                                     </Form>
@@ -380,18 +396,15 @@ export default function DonateForm(){
                         </Col>
                     :
                         <Col span={24} style={{display:'flex',justifyContent:'center',marginTop:'10px',position:'inherit'}}>
-                            <ThankCard data={allValues} />
+                            <ThankCard data={allValues} page={page} setpage={setPage} />
                         </Col>
                 }
-                        {/* <Col span={24} style={{display:'flex',justifyContent:'center',marginTop:'10px',position:'inherit'}}>
-                            <ThankCard data={allValues} />
-                        </Col> */}
                 </Row>
                 <div 
                     style={ 
                         page === 1 ? 
                         {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%'} 
-                        : height < '1100'  ? 
+                        : height < '1200'  ? 
                             {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%'}
                             :
                             {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%',position:'fixed',bottom:0}}

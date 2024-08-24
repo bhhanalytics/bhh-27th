@@ -1,7 +1,7 @@
 {
   "name": "bhh-27th",
   "private": true,
-  "version": "1.1.6",
+  "version": "1.1.7",
   "type": "module",
   "scripts": {
     "full-dev": "concurrently \"vite --mode dev\" \"cd backend && npm run server\"",
