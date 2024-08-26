@@ -138,7 +138,7 @@ donate.post('/search/data', async (req, res) => {
     if (snapshot.exists()) {
       const data = Object.values(snapshot.val());
       var filterdata = data.filter(data=> data.organization_name.toLowerCase().includes(input.value.toLowerCase()) || data.contact_name.toLowerCase().includes(input.value.toLowerCase()) );
-
+      console.log(filterdata)
       res.status(200).json({success:true,data:filterdata});
 
     } else {
