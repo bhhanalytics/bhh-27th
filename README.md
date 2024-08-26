@@ -12,6 +12,9 @@
 
 # Change Log  🔁
 
+### 20240826.v1.1.16
+- Change Icon and title of page
+
 ### 20240826.v1.1.15
 - Hide scroll bar
 - Remove palm opening (Cause perfomence)
