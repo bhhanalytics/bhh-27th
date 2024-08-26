@@ -12,17 +12,24 @@
 
 # Change Log  🔁
 
-### 20240822.v1.1.13
+### 20240826.v1.1.15
+- Hide scroll bar
+- Remove palm opening (Cause perfomence)
+
+### 20240826.v1.1.14
+- Fix download card
+
+### 20240826.v1.1.13
 - Fix qrcode size 
 - Fix marquee speeds
 
-### 20240822.v1.1.12
+### 20240826.v1.1.12
 - Fix overflow form in mobile
 
-### 20240822.v1.1.11
+### 20240826.v1.1.11
 - Add new tree rendering logic
 
-### 20240822.v1.1.10
+### 20240823.v1.1.10
 - Add search
 - Disabled some field in form
 - Responsive form

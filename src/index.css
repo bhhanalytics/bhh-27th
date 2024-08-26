@@ -81,6 +81,16 @@
   /* font-family: "Itim", cursive; */
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
 html{
   scroll-behavior: smooth;
 }

@@ -342,12 +342,12 @@ function App() {
 
   return (
     <>
-      <div className={`palm-1 ${loading ? 'growWitdth-eff' : ''}`}>
+{/*       <div className={`palm-1 ${loading ? 'growWitdth-eff' : ''}`}>
         <img src={palm} alt="" />
       </div>
       <div className={`palm-2 ${loading ? 'growWitdth-eff' : ''}`}>
         <img src={palm} alt="" />
-      </div>
+      </div> */}
 
       <Space direction="vertical" align="center" className='absolute right-2 top-2 p-3'>
         <Link to={'/form'} className='hidden sm:flex flex-col'>
