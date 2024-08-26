@@ -14,7 +14,7 @@ export default function DonateForm(){
     const [type,setType] =useState(0);
     const [allValues,setallvalue] =useState({});
     const [loadingform,setLoadingform] = useState(false);
-    const [page,setPage] = useState(2);
+    const [page,setPage] = useState(0);
     const [data,setData] = useState([]);
     const [value, setValue] = useState();
     const [height, setHeight] = useState(window.innerHeight);
@@ -410,15 +410,19 @@ export default function DonateForm(){
                                         </Form.Item>
                                         <Divider/>
                                         <Form.Item>
-                                            <Button type="primary" htmlType="submit" loading={loadingform}>
-                                                {loadingform ? 'รอบันทึก...' : 'บันทึก'}
+                                            <Button type="default" style={{margin:'0px 0px 0px 0px',fontSize:'14px',color:'#133C7B',float:'right',textDecoration:'underline'}} onClick={()=>{form.resetFields();}} ghost  >
+                                                    เคลียร์แบบฟอร์ม
                                             </Button>
-                                            <Button type="primary" style={{marginLeft:'10px'}} onClick={()=>{form.resetFields();}} ghost >
-                                                ล้าง
-                                            </Button>
-                                            <Button type="default" onClick={()=>{setPage(0)}} >
+                                        </Form.Item>
+                                        <Form.Item>
+                                            <Button type="default" onClick={()=>{setPage(0)}} style={{float:'left'}} >
                                                 ย้อนกลับ
                                             </Button>
+                                            <Button type="primary" htmlType="submit" loading={loadingform} style={{float:'right',paddingLeft:'20px',paddingRight:'20px'}}>
+                                                {loadingform ? 'รอบันทึก...' : 'บันทึก'}
+                                            </Button>
+
+
                                         </Form.Item>
                                     </Form>
                                     </>
