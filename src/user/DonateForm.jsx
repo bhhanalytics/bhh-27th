@@ -14,7 +14,7 @@ export default function DonateForm(){
     const [type,setType] =useState(0);
     const [allValues,setallvalue] =useState({});
     const [loadingform,setLoadingform] = useState(false);
-    const [page,setPage] = useState(0);
+    const [page,setPage] = useState(2);
     const [data,setData] = useState([]);
     const [value, setValue] = useState();
     const [height, setHeight] = useState(window.innerHeight);
