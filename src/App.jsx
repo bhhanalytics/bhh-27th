@@ -116,6 +116,8 @@ function App() {
   const [carbonTotal, setCarbonTotal] = useState(0)
   const [newDonatorQueue , setNewDonatorQueue] = useState([]);
   const [newDonator, setNewDonator] = useState({});
+  const [isInitial , setIsinitial] = useState(true)
+
   const hasFetched = useRef(false); 
   async function getData() {
     /*   const result = await requestHandler(api.get("/api/donate"), {
@@ -157,12 +159,39 @@ function App() {
     });
   }
 
+  const renderTree = () => {
+    setTrees(prevTrees => {
+      let newTrees = [...prevTrees];
+
+      if (newTrees.length >= MAX_TREES) {
+        newTrees[0] = { ...newTrees[0], isHidden: true };
+
+        setTimeout(() => {
+          console.log('DEL');
+          setTrees(currentTrees => {
+            return currentTrees.slice(1);
+          });
+        }, 3000);
+      }
+
+      let treeProp = {
+        x: randInt(0, 90),
+        y: randInt(-7, -2),
+        treeSet: prevTrees,
+        isHidden: false
+      };
+
+      return [...newTrees, treeProp];
+    });
+  }
+
   // Get all data
   useEffect(() => {
+
+
     const userRef = ref(database, 'donate');
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
-      console.log("User data:", data);
       let newDonatorSet = []
       if (data) {
         Object.keys(data).forEach((key) => {
@@ -173,46 +202,29 @@ function App() {
           newDonatorSet.push(newDonator)
         });
         setDonators(newDonatorSet);
-      } else {
-        setDonators([]);
-      }
-    });
+      
+        } else {
+          setDonators([]);
+        }
+      });
+
+
   }, []);
 
-  // Get latest data
-
- /*  useEffect(() => {
-    const userRef = ref(database, 'donate');
-    const latestDonatorQuery = query(userRef, limitToLast(1));
-
-    const unsubscribe = onValue(latestDonatorQuery, (snapshot) => {
-      if (hasFetched.current) {
-        const data = snapshot.val();
-        console.log("New data detected:", data);
-
-        if (data) {
-          const key = Object.keys(data)[0];
-          const latest = {
-            row_id: key,
-            ...data[key],
-          };
-          setNewDonator(latest);
-        } else {
-          setNewDonator(null);
-        }
-      } else {
-        hasFetched.current = true; 
-      }
-    });
-
-    return () => unsubscribe();
-  }, []); */
+  useEffect(()=>{
+    if(donators.length > 0 && isInitial){
+      donators.map((item , i)=>{
+        renderTree()
+      })
+      setIsinitial(false)
+    }
+  },[donators])
 
   // Get latest data
   useEffect(() => {
     const userRef = ref(database, 'donate');
     const latestDonatorQuery = query(userRef, limitToLast(1));
-
+    console.log("Get latest");
     onValue(latestDonatorQuery, (snapshot) => {
       const data = snapshot.val();
       console.log("Latest data:", data);
@@ -229,54 +241,10 @@ function App() {
     });
   }, []);
 
-/* useEffect(() => {
-  const fetchData = async () => {
-    const dataRef = ref(database, 'donate'); 
-    try {
-      const snapshot = await get(dataRef);
-      if (snapshot.exists()) {
-        console.log(snapshot.val());
-        setDonators(snapshot.val());
-      } else {
-        console.log('No data available');
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  fetchData();
-}, []);
- */
-
-/*   useEffect(() => {
-    let i = 0;
-    const intervalId = setInterval(() => {
-      if (i < propData.length) {
-        setNewDonator(propData[i])
-        i++;
-      }
-    }, TICK);
-
-    return () => clearInterval(intervalId); 
-  }, []);
- */
-  // wait for next donator
-
-  // New donator air time
- /*  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if(newDonator?.row_id){
-        setNewDonator({})
-      }
-    }, 10000);
-
-    return () => clearInterval(timeoutId); 
-  }, [newDonator]); */
-
   useEffect(() => {
     if (newDonatorQueue.length === 0) return;
     setNewDonator(newDonatorQueue[0]);
+    renderTree()
 
     const timeout = setTimeout(() => {
       setNewDonatorQueue((prevItems) => prevItems.slice(1));
@@ -315,31 +283,11 @@ function App() {
   }, [donators])
 
   // Push new tree
+
+  
   useEffect(()=>{
     if(donators.length > 0){
-    
-    setTrees(prevTrees => {
-      let newTrees = [...prevTrees];
-
-      if (newTrees.length >= MAX_TREES) {
-        newTrees[0] = { ...newTrees[0], isHidden: true };
-
-        setTimeout(() => {
-          console.log('DEL');
-          setTrees(currentTrees => {
-            return currentTrees.slice(1);
-          });
-        }, 3000);
-      }
-      let treeProp = {
-        x: randInt(0, 90),
-        y: randInt(-7, -2),
-        treeSet: prevTrees,
-        isHidden: false
-      };
-
-      return [...newTrees, treeProp];
-    });
+   
   }
 
   },[donators])
@@ -351,6 +299,7 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    console.log('loading-1');
     setTimeout(() => {
       setLoading(true)
     }, 1000);
