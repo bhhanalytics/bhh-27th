@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect ,useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Summary from './components/Summary'
@@ -24,192 +24,8 @@ const api = axios.create({
   timeout: 15000,
 });
 
-import { ref, onValue ,get } from "firebase/database";
+import { ref, onValue ,get ,query , limitToLast} from "firebase/database";
 import { database } from "./config/firebaseDatabaseConfig";
-
-const propData = [
-  {
-    "row_id": 3,
-    "organization_name": "บริษัทสุขใจ จำกัด",
-    "organization_address": "19/78 บางกอกน้อย กรุงเทพฯ",
-    "organization_phone": "02212555",
-    "donate_total": "200",
-    "contact_name": "อรทัย สมหวัง",
-    "contact_phone": "0851234567",
-    "contact_email": "ornthais@domain.com",
-    "payment_type": "ชำระเงินสด กับ โรงพยาบาลศิริราช วันที่ 28 กย. 67",
-    "payment_status": true,
-    "tree_status": true,
-    "record_time": "2024-08-18T10:23:19.183Z",
-    "isactive": true
-  },
-  {
-    "row_id": 4,
-    "organization_name": "บริษัทธนโชค จำกัด",
-    "organization_address": "456/32 อุดรธานี",
-    "organization_phone": "042785452",
-    "donate_total": "300",
-    "contact_name": "วิชัย ชนะชัย",
-    "contact_phone": "0914567845",
-    "contact_email": "wichai_c@domain.com",
-    "payment_type": "โอนเงินธนาคารกรุงเทพ วันที่ 10 ตค. 67",
-    "payment_status": true,
-    "tree_status": false,
-    "record_time": "2024-08-17T14:45:08.123Z",
-    "isactive": true
-  },
-  {
-    "row_id": 5,
-    "organization_name": "บริษัทสบายใจ จำกัด",
-    "organization_address": "88/9 เชียงใหม่",
-    "organization_phone": "053123789",
-    "donate_total": "22000",
-    "contact_name": "พิมพ์ใจ สุขกาย",
-    "contact_phone": "0923345567",
-    "contact_email": "pimjai.s@domain.com",
-    "payment_type": "ชำระเงินสด กับ โรงพยาบาลสวนดอก วันที่ 15 พย. 67",
-    "payment_status": false,
-    "tree_status": true,
-    "record_time": "2024-08-16T09:18:12.200Z",
-    "isactive": true
-  },
-  {
-    "row_id": 6,
-    "organization_name": "บริษัทเจริญสุข จำกัด",
-    "organization_address": "50/99 ลำปาง",
-    "organization_phone": "054789654",
-    "donate_total": "18000",
-    "contact_name": "กนกวรรณ จันทร์เพ็ญ",
-    "contact_phone": "0874567890",
-    "contact_email": "kanokwan.j@domain.com",
-    "payment_type": "ชำระเงินสด กับ โรงพยาบาลลำปาง วันที่ 22 ตค. 67",
-    "payment_status": false,
-    "tree_status": true,
-    "record_time": "2024-08-15T15:37:48.567Z",
-    "isactive": true
-  },
-  {
-    "row_id": 7,
-    "organization_name": "บริษัทรักไทย จำกัด",
-    "organization_address": "77/8 ขอนแก่น",
-    "organization_phone": "043678912",
-    "donate_total": "25000",
-    "contact_name": "มาลี สุขสันต์",
-    "contact_phone": "0891234567",
-    "contact_email": "malee.s@domain.com",
-    "payment_type": "โอนเงินธนาคารไทยพาณิชย์ วันที่ 30 ธค. 67",
-    "payment_status": true,
-    "tree_status": false,
-    "record_time": "2024-08-14T07:22:45.123Z",
-    "isactive": true
-  },
-  {
-    "row_id": 8,
-    "organization_name": "บริษัทฟ้าใหม่ จำกัด",
-    "organization_address": "124/56 ชลบุรี",
-    "organization_phone": "038987654",
-    "donate_total": "20000",
-    "contact_name": "สมบูรณ์ วิชิต",
-    "contact_phone": "0935678901",
-    "contact_email": "somboon_v@domain.com",
-    "payment_type": "ชำระเงินสด กับ โรงพยาบาลชลบุรี วันที่ 25 พย. 67",
-    "payment_status": true,
-    "tree_status": true,
-    "record_time": "2024-08-13T10:12:34.567Z",
-    "isactive": true
-  },
-  {
-    "row_id": 9,
-    "organization_name": "บริษัทชนะชัย จำกัด",
-    "organization_address": "32/123 นครราชสีมา",
-    "organization_phone": "044765432",
-    "donate_total": "17000",
-    "contact_name": "สุพรรณ สุขกาย",
-    "contact_phone": "0946789012",
-    "contact_email": "supan_s@domain.com",
-    "payment_type": "โอนเงินธนาคารกรุงไทย วันที่ 18 มค. 68",
-    "payment_status": false,
-    "tree_status": false,
-    "record_time": "2024-08-12T08:30:12.789Z",
-    "isactive": true
-  },
-  {
-    "row_id": 10,
-    "organization_name": "บริษัทสุขุม จำกัด",
-    "organization_address": "23/45 เชียงราย",
-    "organization_phone": "053987321",
-    "donate_total": "12000",
-    "contact_name": "อภิวัฒน์ เรืองโรจน์",
-    "contact_phone": "0812345678",
-    "contact_email": "apiwat_r@domain.com",
-    "payment_type": "ชำระเงินสด กับ โรงพยาบาลเชียงราย วันที่ 12 กพ. 68",
-    "payment_status": true,
-    "tree_status": true,
-    "record_time": "2024-08-11T14:45:34.123Z",
-    "isactive": true
-  },
-  {
-    "row_id": 11,
-    "organization_name": "บริษัทเจริญธรรม จำกัด",
-    "organization_address": "75/33 ภูเก็ต",
-    "organization_phone": "076543210",
-    "donate_total": "19000",
-    "contact_name": "ภานุเดช ศรีสุข",
-    "contact_phone": "0856781234",
-    "contact_email": "panudet_s@domain.com",
-    "payment_type": "โอนเงินธนาคารกสิกรไทย วันที่ 28 มค. 68",
-    "payment_status": false,
-    "tree_status": false,
-    "record_time": "2024-08-10T17:23:48.567Z",
-    "isactive": true
-  },
-  {
-    "row_id": 12,
-    "organization_name": "บริษัทสุขขวัญ จำกัด",
-    "organization_address": "95/44 อุบลราชธานี",
-    "organization_phone": "045678912",
-    "donate_total": "22000",
-    "contact_name": "สุวิทย์ วัฒนโชติ",
-    "contact_phone": "0861237890",
-    "contact_email": "suwit_w@domain.com",
-    "payment_type": "ชำระเงินสด กับ โรงพยาบาลอุบลราชธานี วันที่ 14 มีค. 68",
-    "payment_status": true,
-    "tree_status": true,
-    "record_time": "2024-08-09T09:18:12.200Z",
-    "isactive": true
-  },
-  {
-    "row_id": 13,
-    "organization_name": "บริษัทรุ่งเรือง จำกัด",
-    "organization_address": "45/67 สงขลา",
-    "organization_phone": "074765432",
-    "donate_total": "25000",
-    "contact_name": "ธนวัฒน์ ศรีสุข",
-    "contact_phone": "0886789012",
-    "contact_email": "tanawat_s@domain.com",
-    "payment_type": "โอนเงินธนาคารออมสิน วันที่ 15 เมย. 68",
-    "payment_status": false,
-    "tree_status": true,
-    "record_time": "2024-08-08T12:30:12.789Z",
-    "isactive": true
-  },
-  {
-    "row_id": 14,
-    "organization_name": "บริษัทอิ่มบุญ จำกัด",
-    "organization_address": "67/89 หาดใหญ่ สงขลา",
-    "organization_phone": "074765431",
-    "donate_total": "21000",
-    "contact_name": "อนันต์ สุขวัฒน์",
-    "contact_phone": "0819876543",
-    "contact_email": "anan_s@domain.com",
-    "payment_type": "ชำระเงินสด กับ โรงพยาบาลหาดใหญ่ วันที่ 30 เมย. 68",
-    "payment_status": true,
-    "tree_status": false,
-    "record_time": "2024-08-07T18:45:34.123Z",
-    "isactive": true
-  }]
-
-
 
 import {
   Modal,
@@ -225,13 +41,23 @@ const ReviewCard = ({
   donate_total,
   titleNew,
   isNew = false,
-  isEmpty = false
 }) => {
+
+  const [freeze , setFreeze] = useState(false);
+
+  useEffect(()=>{
+    const timeoutId = setTimeout(() => {
+        setFreeze(true)
+    }, 5000);
+
+    return () => clearTimeout(timeoutId);
+  },[])
+
   return (
     <figure
       className={cn(
 
-        ` relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4 ${isNew && 'w-auto'}`,
+        ` relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4 ${isNew && 'w-[280px]'}`,
         // light styles
         `border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05] `,
         // dark styles
@@ -242,11 +68,16 @@ const ReviewCard = ({
         <img className="rounded-full" width="32" height="32" alt="" src={tree} />
         <div className="flex flex-col">
           <figcaption className="text-sm font-medium dark:text-white">
-        { isEmpty && titleNew ? <span className='text-[2rem] py-3 bg-gradient-to-r from-yellow-400 to-orange-400 inline-block text-transparent bg-clip-text'>{titleNew}</span> : ''}
-        { !isEmpty && isNew ? 
+        {titleNew ? <span className='text-[2rem] py-3 bg-gradient-to-r from-yellow-400 to-orange-400 inline-block text-transparent bg-clip-text'>{titleNew}</span> : ''}
+        {!freeze && isNew &&
         <WordRotate className="text-4xl font-bold text-black dark:text-white" 
         words={[<span className='text-[2rem] bg-gradient-to-r from-yellow-400 to-orange-400 inline-block text-transparent bg-clip-text'>ผู้สนับสนุนใหม่</span>,organization_name ? organization_name : contact_name]}
-         duration={2500} /> : (organization_name || contact_name)}
+         duration={2500} />}
+
+        {!isNew &&  (organization_name || contact_name)}
+        {freeze && isNew ? <div className='text-4xl font-bold text-black dark:text-white py-2'> {organization_name || contact_name} </div> : '' }
+          
+
           </figcaption>
           {/* {isEmpty && ( */}
             <>
@@ -283,8 +114,9 @@ function App() {
   const [secondRow, setSecondRow] = useState([])
   const [donateTotal, setDonateTotal] = useState(0)
   const [carbonTotal, setCarbonTotal] = useState(0)
+  const [newDonatorQueue , setNewDonatorQueue] = useState([]);
   const [newDonator, setNewDonator] = useState({});
-
+  const hasFetched = useRef(false); 
   async function getData() {
     /*   const result = await requestHandler(api.get("/api/donate"), {
         showNotifySuccess: false,
@@ -304,26 +136,95 @@ function App() {
     setCarbonTotal(totalDonate * 9.5)
   }
 
-  /* useEffect(()=>{
-    getData()
-  },[]) */
-
-  useEffect(() => {
+  const getDonatorData = () => {
     const userRef = ref(database, 'donate');
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       console.log("User data:", data);
-      
+      let newDonatorSet = []
       if (data) {
         Object.keys(data).forEach((key) => {
           const newDonator = {
             row_id: key,
             ...data[key],
           };
-          setDonators((prevDonators) => [...prevDonators, newDonator]);
+          newDonatorSet.push(newDonator)
         });
+        setDonators(newDonatorSet);
       } else {
         setDonators([]);
+      }
+    });
+  }
+
+  // Get all data
+  useEffect(() => {
+    const userRef = ref(database, 'donate');
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log("User data:", data);
+      let newDonatorSet = []
+      if (data) {
+        Object.keys(data).forEach((key) => {
+          const newDonator = {
+            row_id: key,
+            ...data[key],
+          };
+          newDonatorSet.push(newDonator)
+        });
+        setDonators(newDonatorSet);
+      } else {
+        setDonators([]);
+      }
+    });
+  }, []);
+
+  // Get latest data
+
+ /*  useEffect(() => {
+    const userRef = ref(database, 'donate');
+    const latestDonatorQuery = query(userRef, limitToLast(1));
+
+    const unsubscribe = onValue(latestDonatorQuery, (snapshot) => {
+      if (hasFetched.current) {
+        const data = snapshot.val();
+        console.log("New data detected:", data);
+
+        if (data) {
+          const key = Object.keys(data)[0];
+          const latest = {
+            row_id: key,
+            ...data[key],
+          };
+          setNewDonator(latest);
+        } else {
+          setNewDonator(null);
+        }
+      } else {
+        hasFetched.current = true; 
+      }
+    });
+
+    return () => unsubscribe();
+  }, []); */
+
+  // Get latest data
+  useEffect(() => {
+    const userRef = ref(database, 'donate');
+    const latestDonatorQuery = query(userRef, limitToLast(1));
+
+    onValue(latestDonatorQuery, (snapshot) => {
+      const data = snapshot.val();
+      console.log("Latest data:", data);
+      if (data) {
+        const key = Object.keys(data)[0]; 
+        const latest = {
+          row_id: key,
+          ...data[key],
+        };
+        setNewDonatorQueue((prev) => [...prev ,latest]);
+      } else {
+        setNewDonatorQueue(null);
       }
     });
   }, []);
@@ -361,26 +262,37 @@ function App() {
   }, []);
  */
   // wait for next donator
-  useEffect(() => {
+
+  // New donator air time
+ /*  useEffect(() => {
     const timeoutId = setTimeout(() => {
       if(newDonator?.row_id){
         setNewDonator({})
       }
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(timeoutId); 
-  }, [newDonator]);
-
+  }, [newDonator]); */
 
   useEffect(() => {
-    if (newDonator?.row_id) {
-      setDonators((prev) => [...prev, newDonator])
-    }
-  }, [newDonator]);
+    if (newDonatorQueue.length === 0) return;
+    setNewDonator(newDonatorQueue[0]);
 
+    const timeout = setTimeout(() => {
+      setNewDonatorQueue((prevItems) => prevItems.slice(1));
+      setNewDonator({})
+    }, 10000); 
+
+    return () => clearTimeout(timeout);
+  }, [newDonatorQueue]);
+
+  useEffect(()=>{
+    console.log(newDonatorQueue);
+  },[newDonatorQueue])
+
+  // Set sumamary
   useEffect(() => {
     if(donators.length > 0){
-
       const totalDonate = donators.reduce((total, item) => {
         if (typeof item !== 'undefined') {
           return total + Number(item.donate_total);
@@ -390,9 +302,9 @@ function App() {
       setDonateTotal(totalDonate)
       setCarbonTotal(totalDonate * 9.5)
     }
-
   }, [donators])
 
+  // Slice marquee slide
   useEffect(() => {
     if (donators?.length > 6) {
       setFirstRow(donators.length > 0 ? donators.slice(0, donators.length / 2) : [])
@@ -402,9 +314,10 @@ function App() {
     }
   }, [donators])
 
+  // Push new tree
   useEffect(()=>{
     if(donators.length > 0){
-
+    
     setTrees(prevTrees => {
       let newTrees = [...prevTrees];
 
@@ -431,6 +344,18 @@ function App() {
 
   },[donators])
   
+  useEffect(()=>{
+    console.log(donators);
+  },[donators])
+
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true)
+    }, 1000);
+  }, [])
+
 /*   useEffect(() => {
     let i = 0;
     const intervalId = setInterval(() => {
@@ -463,16 +388,7 @@ function App() {
     return () => clearInterval(intervalId); 
   }, []); */
 
-  useEffect(()=>{
-    console.log(donators);
-  },[donators])
-  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(true)
-    }, 1000);
-  }, [])
 
 
   return (

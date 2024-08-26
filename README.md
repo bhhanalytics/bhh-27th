@@ -13,6 +13,9 @@
 # Change Log  🔁
 
 
+### 20240822.v1.1.9
+- Complete Fetch from realtime db
+  
 ### 20240822.v1.1.8
 - Fetch from firebase
 
