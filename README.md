@@ -12,6 +12,9 @@
 
 # Change Log  🔁
 
+### 20240826.v1.1.18
+- Change new doantor width
+
 ### 20240826.v1.1.16
 - Change Icon and title of page
 
