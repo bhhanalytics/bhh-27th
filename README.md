@@ -12,6 +12,12 @@
 
 # Change Log  🔁
 
+### 20240822.v1.1.13
+- Fix qrcode size 
+- Fix marquee speeds
+
+### 20240822.v1.1.12
+- Fix overflow form in mobile
 
 ### 20240822.v1.1.11
 - Add new tree rendering logic
