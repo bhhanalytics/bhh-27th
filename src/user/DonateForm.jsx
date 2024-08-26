@@ -84,10 +84,11 @@ export default function DonateForm(){
                 var data = json.data;
                 
                 if(data.length !== 0){
-                   var newdata =  data.map((item)=>{
+                   var newdata =  data.map((item,index)=>{
                         if(item.organization_name !== ''){
                             // var text = `${item.organization_name}(${item.contact_name})`
                             return {
+                                key: index,
                                 value : item.organization_name,
                                 label : item.organization_name,
                                 organization_name : item.organization_name,
@@ -95,6 +96,7 @@ export default function DonateForm(){
                             }
                         }else{
                             return {
+                                key: index,
                                 value : item.contact_name,
                                 label : item.contact_name,
                                 organization_name : '',
@@ -102,6 +104,7 @@ export default function DonateForm(){
                             }
                         }
                     })
+                    console.log(newdata)
                     setData(newdata);
                 }else{
                     setData([]);
@@ -127,8 +130,12 @@ export default function DonateForm(){
        
         if(value !== undefined){
             var isData = data.filter(data => data.value = value);
+            if(isData.length === 0){
+                console.log('not select');
+            }else{
+                setPage(2);
+            }
             setallvalue(isData[0]);
-            setPage(2);
             setValue(null);
         }
 
@@ -148,6 +155,9 @@ export default function DonateForm(){
             children: 'Content of Tab Pane 1',
         }
     ];
+
+
+    
 
     return(
         <>
@@ -309,7 +319,9 @@ export default function DonateForm(){
                                                 <Form.Item
                                                     name="organization_address"
                                                     label="ที่อยู่องค์กร(เพื่อออกจดหมายขอบคุณ) "
-                                                    rules={[{ required: true, message: 'Please input the organization address!' }]}
+                                                    rules={[
+                                                        // { required: true, message: 'Please input the organization address!' }
+                                                    ]}
                                                 >
                                                     <TextArea />
                                                 </Form.Item>
@@ -317,9 +329,18 @@ export default function DonateForm(){
                                                 <Form.Item
                                                     name="organization_phone"
                                                     label="หมายเลขโทรศัพท์องค์กร"
-                                                    rules={[{ required: true, message: 'Please input the organization phone number!' }]}
+                                                    rules={[
+                                                        // { required: true, message: 'Please input the organization phone number!' }
+                                                    ]}
                                                 >
-                                                    <Input />
+                                                    <Input 
+                                                        maxLength={10} 
+                                                        onKeyPress={(event) => {
+                                                            if (!/[0-9]/.test(event.key)) {
+                                                                event.preventDefault();
+                                                            }
+                                                        }}
+                                                    />
                                                 </Form.Item>
                                                 </>
                                             : null
@@ -332,21 +353,33 @@ export default function DonateForm(){
                                         >
                                             <Input />
                                         </Form.Item>
-
                                         <Form.Item
                                             name="contact_phone"
-                                            label={type == 1 ?'หมายเลขโทรศัพท์' :'หมายเลขโทรศัพท์ผู้ประสานงาน' }
-                                            rules={[{ required: true, message: 'Please input the contact phone number!' }]}
+                                            label={type === 1 ? 'หมายเลขโทรศัพท์' : 'หมายเลขโทรศัพท์ผู้ประสานงาน'}
+                                            rules={[
+                                                { required: true, message: 'Please input the contact phone number!' },
+                                                // // {
+                                                // // pattern: /^\d{3}-\d{3}-\d{4}$/,
+                                                // // message: 'Please enter a valid phone number in the format xxx-xxx-xxxx!',
+                                                // // },
+                                            ]}
                                         >
-                                            <Input />
-                                        </Form.Item>
+                                            <Input 
+                                                maxLength={10} 
+                                                onKeyPress={(event) => {
+                                                    if (!/[0-9]/.test(event.key)) {
+                                                        event.preventDefault();
+                                                    }
+                                                    }}
+                                            />
+                                         </Form.Item>
 
                                         <Form.Item
                                             name="contact_email"
                                             label={type == 1 ? 'E-mail': 'E-mail ผู้ประสานงาน'}
                                             rules={[
                                             { type: 'email', message: 'The input is not valid E-mail!' },
-                                            { required: true, message: 'Please input the contact email!' },
+                                            // { required: true, message: 'Please input the contact email!' },
                                             ]}
                                         >
                                             <Input />
