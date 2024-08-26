@@ -348,7 +348,7 @@ button:focus-visible {
   background: url('./assets/img/Mesa de trabajo 1.png') no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  min-width: 400px;
+  /* min-width: 400px; */
 }
 
 

@@ -349,15 +349,15 @@ function App() {
         <img src={palm} alt="" />
       </div>
 
-      <Space direction="vertical" align="center" className='absolute right-2 top-2'>
-        <Link to={'/form'} className='hidden sm:block'>
+      <Space direction="vertical" align="center" className='absolute right-2 top-2 p-3'>
+        <Link to={'/form'} className='hidden sm:flex flex-col'>
+        <span className='text-black underline w-full text-center'>ร่วมสนับสนุนได้ที่นี่</span>
+
           <QRCode value={'https://anniversarybangkokhatyai.web.app/form'}
-            size={120} errorLevel="H" />
-          <span className='text-black underline w-full text-center'>ร่วมสนับสนุนได้ที่</span>
+            size={200} errorLevel="H" />
         </Link>
 
         <Link to={'/form'} className='block sm:hidden'>
-          <span className='text-black underline w-full text-center'>ร่วมสนับสนุนได้ที่นี่</span>
         </Link>
       </Space>
 
@@ -386,9 +386,13 @@ function App() {
 
 
           {/* Marquee Logo */}
-          {newDonator.row_id &&
+          {newDonator.row_id ?
                 <div className='w-full flex items-center justify-center mb-2'>
                   <ReviewCard isNew={true} key={'new-'+newDonator?.row_id} {...newDonator} />
+                </div>
+                : 
+                <div className='w-full flex items-center justify-center mb-2 h-[120px]'>
+                 
                 </div>
               }
 
