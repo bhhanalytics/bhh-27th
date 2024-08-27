@@ -7,7 +7,7 @@ import bgimg from "../assets/img/Mesa de trabajo 1.png"
 import Tree from "../components/Tree";
 import treeimg from "../assets/img/forest/tree.svg";
 import ThankCard from "./ThankCard";
-const {Title} = Typography;
+const {Title,Text} = Typography;
 const {TextArea} = Input;
 export default function DonateForm(){
 
@@ -68,6 +68,7 @@ export default function DonateForm(){
             form.resetFields();
             setLoadingform(false);
             setPage(2);
+            setType(0);
         }
     };
 
@@ -410,6 +411,7 @@ export default function DonateForm(){
                                             <InputNumber
                                                 style={{ width: '100%' }}
                                                 min={0}
+                                                max={1000000}
                                                 formatter={(value) => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                                 parser={(value) => value.replace(/\฿\s?|(,*)/g, '')}
                                                 inputMode="decimal"
@@ -426,7 +428,7 @@ export default function DonateForm(){
                                                 <Radio value={'ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67'}>ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67 </Radio>
                                             </Radio.Group>
                                         </Form.Item>
-                                        <Divider/>
+                                        <Divider />
                                         <Form.Item>
                                             <Button 
                                                 type="default" 
@@ -439,12 +441,16 @@ export default function DonateForm(){
                                             </Button>
                                         </Form.Item>
                                         <Form.Item>
-                                            <Button type="default" onClick={()=>{setPage(0)}} style={{float:'left'}} >
+                                            <Button type="default" onClick={()=>{setPage(0);setType(0);}} style={{float:'left'}} >
                                                 ย้อนกลับ
                                             </Button>
                                             <Button type="primary" htmlType="submit" loading={loadingform} style={{float:'right',paddingLeft:'20px',paddingRight:'20px'}} className="btn-donate">
                                                 {loadingform ? 'กำลังบันทึก...' : 'บันทึก'}
                                             </Button>
+                                        </Form.Item>
+                                        <Divider />
+                                        <Form.Item>
+                                            <Text >สอบถามเพื่อเติม คุณโซเฟียนา ฝ่ายการตลาด โทร. 074-272-800  หรือ Line@BangkokHatyai</Text>
                                         </Form.Item>
                                     </Form>
                                     </>

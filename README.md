@@ -12,6 +12,10 @@
 
 # Change Log  🔁
 
+### 20240827.v1.2.3
+- Fix digit donate total
+- Add Contact detail in form
+
 ### 20240827.v1.2.2
 - Change Style Button
 - Fix Select Screen 
@@ -21,14 +25,14 @@
 - Fix focus input form
 
 
-### 20240826.v1.2.1
+### 20240827.v1.2.1
 - Move qrcode 
 - Adjust bubble size
 
-### 20240826.v1.1.19
+### 20240827.v1.1.19
 - Adjust marquee speeds
 
-### 20240826.v1.1.18
+### 20240827.v1.1.18
 - Change new doantor width
 
 
