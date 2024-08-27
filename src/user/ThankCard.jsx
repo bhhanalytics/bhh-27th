@@ -112,11 +112,12 @@ export default function ThankCard(props){
                         ย้อนกลับ
                     </button> */}
                     <Button 
-                        type="primary" 
+                        // type="primary" 
                         shape="round" 
                         style={{width:'100%',margin:0}} 
+                        className="btn-none-outline"
                         size="large" 
-                        danger 
+                        // danger 
                         onClick={()=>{props.setpage(0)}}
                     >
                         ย้อนกลับ

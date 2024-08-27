@@ -432,7 +432,7 @@ button:focus-visible {
   border: 2px solid transparent;
   /* border: 2px solid #7c9d41; Border color on hover */
   background-color: #f3f3c1 ;
-  color: #7c9d41 ;
+  color: #000000 ;
   outline: 0px solid transparent;
 }
 
@@ -456,6 +456,67 @@ button:focus-visible {
 
 
 input,textarea{
-  font-size: 20px !important ;
+  font-size: 18px !important ;
 }
 
+.btn-none-outline{
+  outline: 0px solid transparent;
+  border: 0px solid transparent;
+}
+
+.btn-none-outline:hover{
+  color:red !important;
+  outline: 0px solid transparent;
+  /* border: 1px solid red; */
+
+}
+
+.btn-none-outline:focus{
+  outline: 0px solid transparent;
+  /* border: 1px solid red; */
+}
+
+.btn-donate{
+  background-color: #7c9d41 !important;
+  border: 0px solid transparent !important;
+  color:#ffffff !important;
+}
+
+.btn-donate:hover{
+  background-color: #f3f3c1 !important;
+  border: 1px solid #7c9d41 !important;
+  color:#000000 !important;
+}
+
+.btn-clear:hover{
+  border: 0px solid transparent !important;
+  /* outline: 0px solid transparent !important; */
+}
+
+.btn-clear:focus{
+  border: 0px solid transparent !important;
+  outline: 0px solid transparent !important;
+}
+
+.btn-none{
+  /* background-color: #7c9d41 !important; */
+  border: 0px solid transparent !important;
+  color:#000000 !important;
+}
+
+.btn-none{
+  /* background-color: #7c9d41 !important; */
+  border: 0px solid transparent !important;
+  color:#000000 !important;
+}
+.btn-green{
+  background-color: #7c9d41 !important;
+  border: 0px solid transparent !important;
+  color:#ffffff !important;
+}
+
+.btn-green:hover{
+  background-color: #7c9d41 !important;
+  border: 0px solid transparent !important;
+  color:#ffffff !important;
+}

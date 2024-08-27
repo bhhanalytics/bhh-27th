@@ -16,7 +16,7 @@ export default function Summary({ tree , carbon , className}) {
           {/*   <SummaryItem icon={ <Icon icon="ph:trend-up" />} value={2030230232} subtitile={"ยอดบริจาค"} postfix={'บาท'}  className={'md:col-span-12'} /> */}
             <SummaryItem colorFrom={'#58eeac'} colorTo={'#77f132'} className={'plant'} icon={ <Icon icon="ph:plant-fill"  />}  value={tree} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
             <SummaryItem colorFrom={'#5869ee'} colorTo={'#32cbf1'}
-            className={'carbon'} icon={<Icon icon="material-symbols:co2-rounded" width="6rem" height="4rem" viewBox='0 0 22 22' /> } value={carbon} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> tCO<sub>2</sub>eq </>} />
+            className={'carbon'} icon={<Icon icon="material-symbols:co2-rounded" width="6rem" height="4rem" viewBox='0 0 22 22' /> } value={carbon} subtitile={"ลดก๊าซเรือนกระจกได้"} postfix={<> kgCO<sub>2</sub>eq </>} />
 
     </section>
   )
