@@ -201,7 +201,7 @@ export default function DonateForm(){
                                     page === 0 || page === 1  ?
                                     <>
                                         <Title level={5} style={{paddingTop:'10px'}} >แบบฟอร์มแจ้งความจำนงค์บริจาคเพื่อปลูกป่าชายเลน </Title>
-                                        <p> ร่วมกันปลูกป่าชายเลน หรือ บริจาค 1 บาท = ต้นกล้า1ต้น = คาร์บอนครดิต 9.5  tCO2eq เท่ากับเราได้ออกซิเจนต่อมนุษย์ถึง 2 คน </p>
+                                        <p> ร่วมกันปลูกป่าชายเลน หรือ บริจาค 1 บาท = ต้นกล้า 1 ต้น = คาร์บอนครดิต 9.5  tCO2eq เท่ากับเราได้ออกซิเจนต่อมนุษย์ถึง 2 คน </p>
                                     </>
                                     :
                                     <>
@@ -245,10 +245,13 @@ export default function DonateForm(){
                                                         onChange={handleChange}
                                                         // notFoundContent={null}
                                                         options={data}
+                                                        
                                                     /> 
+
+                                                     
                                             </Col>
                                             <Col md={6} sm={6} xs={8} className="flex item-center justify-center mt-4 " >
-                                                <Button type="primary" style={{width:'90%',margin:0}} onClick={()=>{showCard()}}  >ค้นหา</Button>
+                                                <Button type="default" style={{width:'90%',margin:0}} onClick={()=>{showCard()}}  >ค้นหา</Button>
                                             </Col>
                                             {/* <Col span={24} className="flex item-center justify-center my-5 " >
                                                 <Select
@@ -340,6 +343,7 @@ export default function DonateForm(){
                                                                 event.preventDefault();
                                                             }
                                                         }}
+                                                        inputMode="decimal"
                                                     />
                                                 </Form.Item>
                                                 </>
@@ -371,6 +375,7 @@ export default function DonateForm(){
                                                         event.preventDefault();
                                                     }
                                                     }}
+                                                inputMode="decimal"
                                             />
                                          </Form.Item>
 
@@ -395,6 +400,7 @@ export default function DonateForm(){
                                                 min={0}
                                                 formatter={(value) => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                                 parser={(value) => value.replace(/\฿\s?|(,*)/g, '')}
+                                                inputMode="decimal"
                                             />
                                         </Form.Item>
 

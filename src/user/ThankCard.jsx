@@ -124,17 +124,30 @@ export default function ThankCard(props){
                 </Col>
 
                 {/* --------Card Download------- */}
-                <Col span={24}  style={{backgroundColor:'rgba(250,250,0,0.0)',paddingTop:'20px',paddingBottom:'20px'} }  >
+                <Col span={24}  style={{paddingTop:'20px',paddingBottom:'20px'} }  >
+                    <div
+                    style={{                            
+                        maxWidth:'100vh',
+                        minWidth:'100vh',
+                        height:'100vh',
+                        zIndex:-1 ,
+                        position:'fixed',
+                        top:0,
+                        left:0,
+                        backgroundColor:'#fff'
+                    }}
+                    >
+
+                    </div>
                     <Card
                         className="thank-card"
                         style={{                            
-                            maxWidth:'350px',
-                            minWidth:'320px',
-                            zIndex:-1 ,
+                            maxWidth:'320px',
+                            minWidth:'300px',
+                            zIndex:-9999 ,
                             position:'fixed',
                             top:0,
                             left:0,
-                        
                         }}
                         
                         ref={cardRef}
