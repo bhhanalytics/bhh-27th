@@ -349,7 +349,7 @@ function App() {
         <img src={palm} alt="" />
       </div> */}
 
-      <Space direction="vertical" align="center" className='absolute right-2 top-2 p-3'>
+      <Space direction="vertical" align="center" className='absolute left-2 top-2 p-3'>
         <Link to={'/form'} className='hidden sm:flex flex-col'>
         <span className='text-black underline w-full text-center'>ร่วมสนับสนุนได้ที่นี่</span>
 
@@ -361,7 +361,7 @@ function App() {
         </Link>
       </Space>
 
-      <div className='absolute left-2 top-2'>
+      <div className='absolute right-2 top-2'>
         <Version />
       </div>
 
@@ -373,17 +373,16 @@ function App() {
 
           {/* Header Logo */}
           <div className="icon-set flex gap-5 w-full items-center justify-center pointer-events-none select-none">
-            <div className="w-full max-w-[120px]">
+            <div className="w-full max-w-[150px]">
               <img src={bhh27Icon} className='object-contain w-full h-full' alt="bhh27icon" />
             </div>
-            <div className="w-full max-w-[120px]">
+            <div className="w-full max-w-[150px]">
               <img src={gw} className='object-contain' alt="bhh27icon" />
             </div>
           </div>
 
           {/* Summary */}
-          <Summary tree={donateTotal} carbon={carbonTotal} />
-
+          <Summary tree={donateTotal} carbon={carbonTotal} className={'mt-[100px] gap-[3rem]'} />
 
           {/* Marquee Logo */}
           {newDonator.row_id ?
@@ -404,12 +403,12 @@ function App() {
             </div>
             :
             <div className="relative flex w-full flex-col items-center h-[430px] justify-start overflow-hidden rounded-lg ">
-              <Marquee pauseOnHover className="[--duration:20s]" key={'m1'}>
+              <Marquee pauseOnHover className="[--duration:70s]" key={'m1'}>
                 {firstRow.map((review) => (
                   <ReviewCard key={'donator-f-'+review?.row_id} {...review} />
                 ))}
               </Marquee>
-              <Marquee reverse pauseOnHover className="[--duration:20s]" key={'m2'}>
+              <Marquee reverse pauseOnHover className="[--duration:70s]" key={'m2'}>
                 {secondRow.map((review) => (
                   <ReviewCard key={'donator-s-'+review?.row_id} {...review} />
                 ))}

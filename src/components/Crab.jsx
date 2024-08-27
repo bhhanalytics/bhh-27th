@@ -2,10 +2,10 @@ import React, {useState , useEffect} from 'react'
 
 const randInt = (min, max) => Math.random() * (max - min) + min;
 
-const Crab = React.memo(({ className, size, svgWidth, svgHeight }) => {
+const Crab = React.memo(({ className, size, svgWidth, svgHeight , speed = 0.5 }) => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [targetPosition, setTargetPosition] = useState({ x: 0, y: 0 });
-    const speed = 0.5
+    //const speed = 0.5
   
     const getRandomPosition = () => ({
       x: randInt(0,90),
