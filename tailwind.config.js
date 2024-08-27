@@ -72,8 +72,8 @@ module.exports = {
           to: { height: "0" },
         },
         marquee: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+          '0%': { transform: "translateX(0)" },
+          '100%': { transform: "translateX(calc(-100% - var(--gap)))" },
         },
         "marquee-vertical": {
           from: { transform: "translateY(0)" },
@@ -91,7 +91,7 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        marquee: "marquee 70s linear infinite",
+        marquee: "marquee var(--duration) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
         meteor: "meteor 5s linear infinite",
         "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",

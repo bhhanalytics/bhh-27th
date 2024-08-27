@@ -42,11 +42,15 @@ export default function Forest({ trees }) {
                 href={land} // Ensure that 'land' is a valid URL or path to the image
             />
    
-      <Crab className={"crab"} x={3} y={-2} 
-           svgWidth={svgSize.width}
-          svgHeight={svgSize.height}
-          size={2}
+      <Crab className={"crab"} 
+            x={3} 
+            y={-2} 
+            svgWidth={svgSize.width}
+            svgHeight={svgSize.height}
+            size={2}
+            speed={0.3}
           />
+
 
         { trees.map((item,i)=> <Tree {...item} key={`t-${i}`}/>)}
 

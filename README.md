@@ -13,6 +13,11 @@
 # Change Log  🔁
 
 
+
+### 20240826.v1.2.1
+- Move qrcode 
+- Adjust bubble size
+
 ### 20240826.v1.1.19
 - Adjust marquee speeds
 
