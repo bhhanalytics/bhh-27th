@@ -12,6 +12,10 @@
 
 # Change Log  🔁
 
+### 20240827.v1.2.0
+- change input mode 
+- Fix focus input form
+
 ### 20240826.v1.1.17
 - Change Button in form donate
 
