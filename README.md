@@ -12,6 +12,10 @@
 
 # Change Log  🔁
 
+### 20240827.v1.2.2
+- Change Style Button
+- Fix Select Screen 
+
 ### 20240827.v1.2.0
 - change input mode 
 - Fix focus input form

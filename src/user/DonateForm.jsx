@@ -16,7 +16,8 @@ export default function DonateForm(){
     const [loadingform,setLoadingform] = useState(false);
     const [page,setPage] = useState(0);
     const [data,setData] = useState([]);
-    const [value, setValue] = useState();
+    const [newData,setNewData] = useState([]);
+    const [values, setValues] = useState();
     const [height, setHeight] = useState(window.innerHeight);
     const [form] = Form.useForm();
     const api_url = import.meta.env.VITE_BASE_URL;
@@ -39,6 +40,8 @@ export default function DonateForm(){
         window.removeEventListener('resize', handleResize);
       };
     }, [height]);
+
+
 
 
     const onFinish = async(values) => {
@@ -91,6 +94,7 @@ export default function DonateForm(){
                                 key: index,
                                 value : item.organization_name,
                                 label : item.organization_name,
+                                name :item.organization_name ,
                                 organization_name : item.organization_name,
                                 contact_name : item.contact_name 
                             }
@@ -99,12 +103,13 @@ export default function DonateForm(){
                                 key: index,
                                 value : item.contact_name,
                                 label : item.contact_name,
+                                name : item.contact_name,
                                 organization_name : '',
                                 contact_name : item.contact_name 
                             }
                         }
                     })
-                    console.log(newdata)
+
                     setData(newdata);
                 }else{
                     setData([]);
@@ -123,20 +128,21 @@ export default function DonateForm(){
     };
 
     const handleChange = (newValue) => {
-        setValue(newValue);
+        setValues(newValue);
     };
 
     const showCard = ()=>{
-       
-        if(value !== undefined){
-            var isData = data.filter(data => data.value = value);
+
+        if(values !== undefined){
+            var isData = data.filter(data => data.value == values);
             if(isData.length === 0){
                 console.log('not select');
             }else{
                 setPage(2);
             }
+            
             setallvalue(isData[0]);
-            setValue(null);
+            setValues(null);
         }
 
     }
@@ -156,7 +162,14 @@ export default function DonateForm(){
         }
     ];
 
+    const handleDropdownVisibleChange = (open) => {
 
+        if (open) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+      };
     
 
     return(
@@ -201,7 +214,7 @@ export default function DonateForm(){
                                     page === 0 || page === 1  ?
                                     <>
                                         <Title level={5} style={{paddingTop:'10px'}} >แบบฟอร์มแจ้งความจำนงค์บริจาคเพื่อปลูกป่าชายเลน </Title>
-                                        <p> ร่วมกันปลูกป่าชายเลน หรือ บริจาค 1 บาท = ต้นกล้า 1 ต้น = คาร์บอนครดิต 9.5  tCO2eq เท่ากับเราได้ออกซิเจนต่อมนุษย์ถึง 2 คน </p>
+                                        <p> ร่วมกันปลูกป่าชายเลน หรือ บริจาค 1 บาท = ต้นกล้า 1 ต้น = คาร์บอนครดิต 9.5  kgCO2eq เท่ากับเราได้ออกซิเจนต่อมนุษย์ถึง 2 คน </p>
                                     </>
                                     :
                                     <>
@@ -235,7 +248,7 @@ export default function DonateForm(){
  
                                                     <Select
                                                         showSearch
-                                                        value={value}
+                                                        value={values}
                                                         placeholder="ค้นหาผู้ร่วมสนับสนุน(ชื่อองค์กร,ชื่อ-สกุล)"
                                                         style={{width:'90%'}}
                                                         defaultActiveFirstOption={false}
@@ -243,12 +256,11 @@ export default function DonateForm(){
                                                         filterOption={false}
                                                         onSearch={handleSearch}
                                                         onChange={handleChange}
-                                                        // notFoundContent={null}
+                                                        notFoundContent={null}
                                                         options={data}
-                                                        
+                                                        onDropdownVisibleChange={handleDropdownVisibleChange} 
                                                     /> 
 
-                                                     
                                             </Col>
                                             <Col md={6} sm={6} xs={8} className="flex item-center justify-center mt-4 " >
                                                 <Button type="default" style={{width:'90%',margin:0}} onClick={()=>{showCard()}}  >ค้นหา</Button>
@@ -272,7 +284,7 @@ export default function DonateForm(){
                                                 <Divider ></Divider>
                                             </Col>
                                             <Col span={24} className="flex item-center justify-center ">
-                                                <Button type="primary" style={{width:'100%'}} onClick={()=>{setPage(1)}}  >ร่วมสนับสนุน</Button>
+                                                <Button type="default" style={{width:'100%'}} onClick={()=>{setPage(1)}} className="btn-donate" >ร่วมสนับสนุน</Button>
                                             </Col>
                                         </Row>
                                         {/* <div className="flex item-center justify-center my-5 ">
@@ -289,9 +301,9 @@ export default function DonateForm(){
                                     <>
                                     <div style={{width:'100%',display:'flex',justifyContent:'center',margin:'auto',marginBottom:'3rem',marginTop:'2rem'}} >
                                         <Flex vertical gap="middle" style={{width:'90%'}} >
-                                            <Radio.Group defaultValue={0} buttonStyle="solid" className="flex m-auto" onChange={(e)=>{setType(e.target.value)}} >
-                                                <Radio.Button value={0}  className="text-center w-32 " >บริษัท</Radio.Button>
-                                                <Radio.Button value={1}  className="text-center w-32 " >บุคคลทั่วไป</Radio.Button>
+                                            <Radio.Group defaultValue={0} buttonStyle="solid" className="flex m-auto " onChange={(e)=>{setType(e.target.value)}} >
+                                                <Radio.Button value={0}  className={type === 0 ? "text-center w-32 btn-green ":"text-center w-32 btn-none "} >บริษัท</Radio.Button>
+                                                <Radio.Button value={1}  className={type === 1 ? "text-center w-32 btn-green " : "text-center w-32 btn-none "} >บุคคลทั่วไป</Radio.Button>
                                             </Radio.Group>
                                         </Flex>
                                     </div>
@@ -416,7 +428,13 @@ export default function DonateForm(){
                                         </Form.Item>
                                         <Divider/>
                                         <Form.Item>
-                                            <Button type="default" style={{margin:'0px 0px 0px 0px',fontSize:'14px',color:'#133C7B',float:'right',textDecoration:'underline'}} onClick={()=>{form.resetFields();}} ghost  >
+                                            <Button 
+                                                type="default" 
+                                                style={{margin:'0px 0px 0px 0px',fontSize:'14px',color:'#133C7B',float:'right',textDecoration:'underline'}} 
+                                                onClick={()=>{form.resetFields();}} 
+                                                ghost  
+                                                className="btn-clear"
+                                            >
                                                     เคลียร์แบบฟอร์ม
                                             </Button>
                                         </Form.Item>
@@ -424,11 +442,9 @@ export default function DonateForm(){
                                             <Button type="default" onClick={()=>{setPage(0)}} style={{float:'left'}} >
                                                 ย้อนกลับ
                                             </Button>
-                                            <Button type="primary" htmlType="submit" loading={loadingform} style={{float:'right',paddingLeft:'20px',paddingRight:'20px'}}>
-                                                {loadingform ? 'รอบันทึก...' : 'บันทึก'}
+                                            <Button type="primary" htmlType="submit" loading={loadingform} style={{float:'right',paddingLeft:'20px',paddingRight:'20px'}} className="btn-donate">
+                                                {loadingform ? 'กำลังบันทึก...' : 'บันทึก'}
                                             </Button>
-
-
                                         </Form.Item>
                                     </Form>
                                     </>
