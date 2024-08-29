@@ -12,6 +12,10 @@
 
 # Change Log  🔁
 
+### 20240829.v1.2.4
+ - Show donate total
+ - Adjust carbon size
+
 ### 20240827.v1.2.2
 - Change Style Button
 - Fix Select Screen 

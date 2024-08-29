@@ -1,7 +1,7 @@
 {
   "name": "bhh-27th",
   "private": true,
-  "version": "1.2.2",
+  "version": "1.2.4",
   "type": "module",
   "scripts": {
     "full-dev": "concurrently \"vite --mode dev\" \"cd backend && npm run server\"",
@@ -29,7 +29,7 @@
     "env-cmd": "^10.1.0",
     "firebase": "^10.13.0",
     "firebase-admin": "^12.3.1",
-    "framer-motion": "^11.3.28",
+    "framer-motion": "^11.3.30",
     "html-to-image": "^1.11.11",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",

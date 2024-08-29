@@ -26,7 +26,8 @@ const SummaryItem = ({ value , subtitile , icon , postfix , className , colorFro
 
     
   const numberBreakpoint = {
-    1000000: "text-[2.5rem]",
+    10000000: "text-[1.5rem]",
+    1000000: "text-[1.5rem]",
     100000: "text-[2.5rem]",
     10000: "text-[3rem]",
     0: "text-[4rem]",

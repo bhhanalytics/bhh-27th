@@ -81,7 +81,7 @@ const ReviewCard = ({
           </figcaption>
           {/* {isEmpty && ( */}
             <>
-              <p className="text-xs font-medium dark:text-white/40">สนับสนุนต้นไม้ {/* <span className='text-yellow-600'>{Number(donate_total).toLocaleString()}</span> ต้น */}</p>
+              <p className="text-xs font-medium dark:text-white/40">สนับสนุนต้นไม้ <span className='text-yellow-600'>{Number(donate_total).toLocaleString()}</span> ต้น</p>
               { isNew && <span className='text-yellow-700 text-[.6rem]'>ล่าสุด</span>}
             </>
        {/*    )} */}
