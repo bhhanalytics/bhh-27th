@@ -17,9 +17,14 @@
 - Eidt Layout Form Donate 
 - admin page 
 
+### 20240829.v1.2.4
+ - Show donate total
+ - Adjust carbon size
+
 ### 20240827.v1.2.3
 - Fix digit donate total
 - Add Contact detail in form
+
 
 ### 20240827.v1.2.2
 - Change Style Button
