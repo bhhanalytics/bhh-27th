@@ -12,9 +12,19 @@
 
 # Change Log  🔁
 
+### 20240828.v1.2.5
+- Show Donate Total in marquee
+- Eidt Layout Form Donate 
+- admin page 
+
 ### 20240829.v1.2.4
  - Show donate total
  - Adjust carbon size
+
+### 20240827.v1.2.3
+- Fix digit donate total
+- Add Contact detail in form
+
 
 ### 20240827.v1.2.2
 - Change Style Button
@@ -25,14 +35,14 @@
 - Fix focus input form
 
 
-### 20240826.v1.2.1
+### 20240827.v1.2.1
 - Move qrcode 
 - Adjust bubble size
 
-### 20240826.v1.1.19
+### 20240827.v1.1.19
 - Adjust marquee speeds
 
-### 20240826.v1.1.18
+### 20240827.v1.1.18
 - Change new doantor width
 
 

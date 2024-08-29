@@ -1,4 +1,4 @@
-import { Card, Col, Form, Row ,Typography,Tabs,Button, Input, Radio ,Flex,InputNumber, Divider,Select } from "antd";
+import { Card, Col, Form, Row ,Typography,Tabs,Button, Input, Radio ,Flex,InputNumber, Divider,Select,message } from "antd";
 import { useState,useEffect } from "react";
 import bhh27Icon from '../assets/img/BHH27icon.png'
 import gw from '../assets/img/gw.png'
@@ -7,7 +7,7 @@ import bgimg from "../assets/img/Mesa de trabajo 1.png"
 import Tree from "../components/Tree";
 import treeimg from "../assets/img/forest/tree.svg";
 import ThankCard from "./ThankCard";
-const {Title} = Typography;
+const {Title,Text} = Typography;
 const {TextArea} = Input;
 export default function DonateForm(){
 
@@ -21,11 +21,16 @@ export default function DonateForm(){
     const [height, setHeight] = useState(window.innerHeight);
     const [form] = Form.useForm();
     const api_url = import.meta.env.VITE_BASE_URL;
-  
+    const [messageApi, contextHolder] = message.useMessage();
     useEffect(()=>{
         fetchdonate(); 
     },[])
-
+    const warning = (massage) => {
+        messageApi.open({
+          type: 'warning',
+          content: massage,
+        });
+      };
 
     useEffect(() => {
       
@@ -52,6 +57,7 @@ export default function DonateForm(){
             data.organization_name = ''
             data.organization_address = ''
             data.organization_phone = ''
+            data.donate_type = ''
 
         }
         setallvalue(data);
@@ -68,6 +74,7 @@ export default function DonateForm(){
             form.resetFields();
             setLoadingform(false);
             setPage(2);
+            setType(0);
         }
     };
 
@@ -136,13 +143,15 @@ export default function DonateForm(){
         if(values !== undefined){
             var isData = data.filter(data => data.value == values);
             if(isData.length === 0){
-                console.log('not select');
+                warning('ไม่พบข้อมูล')
             }else{
                 setPage(2);
             }
             
             setallvalue(isData[0]);
             setValues(null);
+        }else{
+            warning('กรุณาค้นหาและเลือกรายชื่อ')
         }
 
     }
@@ -174,7 +183,7 @@ export default function DonateForm(){
 
     return(
         <>
-
+            {contextHolder}
             <div  
                 className=' text-black w-full min-h-screen flex items-center justify-start flex-col gap-2 form-img-bg zoomed-element ' 
                 style={{
@@ -240,51 +249,35 @@ export default function DonateForm(){
                                     page === 0 ?
                                     <>  
                                         <Row>
-                                            {/* <Col span={24} className="flex item-center justify-center my-4" >
-                                                <Divider style={{margin:0}}/>
-                                             </Col> */}
 
+                                            <Col span={24} className="flex item-center justify-center mt-6">
+                                                <Button type="default" style={{width:'100%'}} onClick={()=>{setPage(1)}} className="btn-donate" >คลิก! ร่วมสนับสนุน</Button>
+                                            </Col>
+                                            <Col span={24} >
+                                                <Divider className="my-4" ></Divider>
+                                            </Col>
+                                            <Col span={24}>
+                                                <Text style={{margin:'16px',marginLeft:'1.2rem'}} >ค้นหาผู้ร่วมสนับสนุน</Text>
+                                            </Col>
                                             <Col md={18} sm={18} xs={16} className="flex item-center justify-center mt-4 " >
- 
-                                                    <Select
-                                                        showSearch
-                                                        value={values}
-                                                        placeholder="ค้นหาผู้ร่วมสนับสนุน(ชื่อองค์กร,ชื่อ-สกุล)"
-                                                        style={{width:'90%'}}
-                                                        defaultActiveFirstOption={false}
-                                                        suffixIcon={null}
-                                                        filterOption={false}
-                                                        onSearch={handleSearch}
-                                                        onChange={handleChange}
-                                                        notFoundContent={null}
-                                                        options={data}
-                                                        onDropdownVisibleChange={handleDropdownVisibleChange} 
-                                                    /> 
-
-                                            </Col>
-                                            <Col md={6} sm={6} xs={8} className="flex item-center justify-center mt-4 " >
-                                                <Button type="default" style={{width:'90%',margin:0}} onClick={()=>{showCard()}}  >ค้นหา</Button>
-                                            </Col>
-                                            {/* <Col span={24} className="flex item-center justify-center my-5 " >
                                                 <Select
                                                     showSearch
-                                                    value={value}
-                                                    placeholder="ค้นหาผู้ร่วมสนับสนุน(ชื่อองค์กร,ชื่อ-สกุล)"
+                                                    value={values}
+                                                    placeholder="ค้นหาโดย(ชื่อองค์กร,ชื่อ-สกุล)"
                                                     style={{width:'90%'}}
                                                     defaultActiveFirstOption={false}
                                                     suffixIcon={null}
                                                     filterOption={false}
                                                     onSearch={handleSearch}
                                                     onChange={handleChange}
-                                                    // notFoundContent={null}
+                                                    notFoundContent={null}
                                                     options={data}
-                                                />
-                                            </Col> */}
-                                            <Col span={24} >
-                                                <Divider ></Divider>
+                                                    onDropdownVisibleChange={handleDropdownVisibleChange} 
+                                                /> 
+
                                             </Col>
-                                            <Col span={24} className="flex item-center justify-center ">
-                                                <Button type="default" style={{width:'100%'}} onClick={()=>{setPage(1)}} className="btn-donate" >ร่วมสนับสนุน</Button>
+                                            <Col md={6} sm={6} xs={8} className="flex item-center justify-center mt-4 " >
+                                                <Button type="default" style={{width:'90%',margin:0}} onClick={()=>{showCard()}}  >แสดง</Button>
                                             </Col>
                                         </Row>
                                         {/* <div className="flex item-center justify-center my-5 ">
@@ -410,12 +403,13 @@ export default function DonateForm(){
                                             <InputNumber
                                                 style={{ width: '100%' }}
                                                 min={0}
+                                                max={1000000}
                                                 formatter={(value) => `฿ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                                 parser={(value) => value.replace(/\฿\s?|(,*)/g, '')}
                                                 inputMode="decimal"
                                             />
                                         </Form.Item>
-
+{/* 
                                         <Form.Item
                                             name="donate_type"
                                             label="รูปแบบการชำระเงิน"
@@ -425,8 +419,8 @@ export default function DonateForm(){
                                                 <Radio value={'ชำระเงินสด กับ โรงพยาบาลกรุงเทพหาดใหญ่ วันที่ 31 สค. 67'}>ชำระเงินสด กับ โรงพยาบาลกรุงเทพหาดใหญ่ วันที่ 31 สค. 67 </Radio>
                                                 <Radio value={'ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67'}>ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67 </Radio>
                                             </Radio.Group>
-                                        </Form.Item>
-                                        <Divider/>
+                                        </Form.Item> */}
+                                        <Divider />
                                         <Form.Item>
                                             <Button 
                                                 type="default" 
@@ -439,12 +433,16 @@ export default function DonateForm(){
                                             </Button>
                                         </Form.Item>
                                         <Form.Item>
-                                            <Button type="default" onClick={()=>{setPage(0)}} style={{float:'left'}} >
+                                            <Button type="default" onClick={()=>{setPage(0);setType(0);}} style={{float:'left'}} >
                                                 ย้อนกลับ
                                             </Button>
                                             <Button type="primary" htmlType="submit" loading={loadingform} style={{float:'right',paddingLeft:'20px',paddingRight:'20px'}} className="btn-donate">
                                                 {loadingform ? 'กำลังบันทึก...' : 'บันทึก'}
                                             </Button>
+                                        </Form.Item>
+                                        <Divider />
+                                        <Form.Item>
+                                            <Text >สอบถามเพื่อเติม คุณโซเฟียนา ฝ่ายการตลาด โทร. 074-272-800  หรือ Line@BangkokHatyai</Text>
                                         </Form.Item>
                                     </Form>
                                     </>

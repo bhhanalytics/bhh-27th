@@ -12,6 +12,7 @@ import {
   DatePicker,
   Switch,
   Divider,
+  Typography
 } from "antd";
 
 import dayjs from "dayjs";
@@ -34,7 +35,7 @@ const RowContext = createContext({});
 const { RangePicker } = DatePicker;
 const { Column } = Table;
 const { TextArea } = Input;
-
+const {Text} = Typography;
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 15000,
@@ -161,6 +162,8 @@ export default function DynamicTable({ reload }) {
 
   const [form] = Form.useForm();
   const notify = (text) => toast.success(text);
+  const api_url = import.meta.env.VITE_BASE_URL;
+
 
   const handleOk = () => {
     form.submit();
@@ -281,14 +284,59 @@ export default function DynamicTable({ reload }) {
         )
       : [];
 
-  const onChange = (id, e) => {
-    let checked = e.target.checked;
-    updateStatus(id, Number(checked));
+  const onChange = async(id, e) => {
+    // let checked = e.target.checked;
+    // updateStatus(id, Number(checked));
+    const response = await fetch(api_url+'/form/update/status/donate',{
+      method:"POST",
+      headers: {
+          Accept: "application/json",
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({row_id:id})
+     });
+
+    if(response.status==200){
+      console.log('success')
+      getData();
+    }
   };
+
+  const onDelete = async(id)=>{
+    const response = await fetch(api_url+'/form/delete/donate',{
+      method:"POST",
+      headers: {
+          Accept: "application/json",
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({row_id:id})
+     });
+
+    if(response.status==200){
+      console.log('success')
+      getData();
+    }
+  }
   useEffect(() => {
     getData();
   }, [reload]);
 
+
+  const OrganizationInfo = ({data})=>{
+    console.log(data);
+    if(data.organization_name != '' && data.organization_name != undefined){
+      return(
+        <>
+            <Text style={{fontWeight:'700'}} >{data.organization_name}</Text><br/>
+            <Text >ที่อยู่ : {data.organization_address}</Text><br/>
+            <Text>{data.organization_phone}</Text>
+        </>
+      )
+    }else{
+      return <></>;
+    }
+
+  }
   return (
     <>
       <Toaster />
@@ -347,22 +395,39 @@ export default function DynamicTable({ reload }) {
                 width="80"
                 render={() => <DragHandle />}
               />
-              <Column title="Title" dataIndex="title" key="title" />
+              {/* <Column title="Title" dataIndex="title" key="title" /> */}
               <Column
-                title="Detail"
-                dataIndex="detail"
-                key="lastName"
+                title="ข้อมูลบริษัท"
+                dataIndex="organization_name"
+                key="organization_name"
+                render={(value, record) => <OrganizationInfo data={record}/>}
+              />
+              <Column
+                title="ชื่อ-สกุล (ผู้ประสานงาน)"
+                dataIndex="contact_name"
+                key="contact_name"
                 render={(value, record) => (
-                  <div dangerouslySetInnerHTML={{ __html: record.detail }} />
+                  <div dangerouslySetInnerHTML={{ __html: record.contact_name }} />
                 )}
               />
               <Column
-                title="ยอดบริจาค"
+                title="หมายเลขโทรศัพท์ "
+                dataIndex="contact_phone"
+                key="contact_phone"
+                render={(value, record) => (
+                  <div dangerouslySetInnerHTML={{ __html: record.contact_phone }} />
+                )}
+              />
+              <Column
+                title="ยอดบริจาค(บาท)"
                 dataIndex="donate_total"
                 key="donate_total"
-                render={(value, record) => (
-                  <Input value={value} />
-                )}
+                render={(value, record) => {
+                  // <Input value={value} />
+                  // <div dangerouslySetInnerHTML={{ __html: record.donate_total }} />
+                  const formattedValue = Number(value).toLocaleString('en-US'); // Formats with commas
+                  return <div>{formattedValue}</div>;
+                }}
               />
               <Column
                 title="วันที่ลงทะเบียน"
@@ -386,19 +451,21 @@ export default function DynamicTable({ reload }) {
                 key="action"
                 render={(_, record) => (
                   <Space size="middle">
-                    <a onClick={() => handlerUpdate(record)}>Edit</a>
-                    <a onClick={() => handlerDelete(record)}>Delete</a>
+                    {/* <a onClick={() => handlerUpdate(record)}>Edit</a>
+                    <a onClick={() => handlerDelete(record)}>Delete</a> */}
+                    <a style={{color:'red'}} onClick={() => onDelete(record.row_id)}>Delete</a>
                   </Space>
                 )}
               />
 
               <Column
                 title="Complete"
-                dataIndex="status"
-                key="status"
+                dataIndex="payment_status"
+                key="payment_status"
                 render={(value, record) => (
                   <Checkbox
                     defaultChecked={value == 1}
+                    checked={record.payment_status}
                     onClick={(checked) => onChange(record.row_id, checked)}
                   >
                     Complete
