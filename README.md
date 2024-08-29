@@ -12,6 +12,11 @@
 
 # Change Log  🔁
 
+### 20240828.v1.2.5
+- Show Donate Total in marquee
+- Eidt Layout Form Donate 
+- admin page 
+
 ### 20240827.v1.2.3
 - Fix digit donate total
 - Add Contact detail in form

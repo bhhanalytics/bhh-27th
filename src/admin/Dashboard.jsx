@@ -194,6 +194,7 @@ export default function Dashboard() {
           <ul>
             <li className="pointer-events-none select-none">Management</li>
           </ul>
+          <button style={{position:'absolute',right:20,backgroundColor:'transparent',color:'red'}} onClick={()=>{navigate('/login');localStorage.clear()}}> ⏻ logout</button>
         </header>
 
         <section className="content w-full px-[50px] grid grid-cols-12  gap-3">

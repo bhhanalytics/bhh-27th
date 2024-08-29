@@ -172,7 +172,7 @@ donate.post('/insert/donate',async(req,res)=>{
 donate.get('/get/donate',async(req,res)=>{
     const input = req.body;
     const query = `SELECT row_id, organization_name, organization_address, organization_phone, donate_total, contact_name, contact_phone, contact_email, payment_type, payment_status, tree_status, record_time, isactive
-    FROM donate_list dl where dl.isactive = true ; `;
+    FROM donate_list dl where dl.isactive = true order by row_id desc ; `;
     try{
         const result = await connectToDB(query);
         if(result.length >0){
@@ -183,6 +183,30 @@ donate.get('/get/donate',async(req,res)=>{
     }catch(error){
         res.status(500).json({success:false,Error:'Error :'+error})
     }
+})
+
+donate.post('/update/status/donate',async(req,res)=>{
+    const input = req.body;
+    const query = `update donate_list set payment_status = true where row_id = ${input.row_id}`;
+    console.log(input.row_id)
+    try{
+      const result = await connectToDB(query);
+      res.status(200).json({success:true});
+    }catch(error){
+      res.status(500).json({success:false,Error:'Error :'+error});
+    }
+})
+
+donate.post('/delete/donate',async(req,res)=>{
+  const input = req.body;
+  const query = `update donate_list set isactive = false where row_id = ${input.row_id}`;
+  console.log(input.row_id)
+  try{
+    const result = await connectToDB(query);
+    res.status(200).json({success:true});
+  }catch(error){
+    res.status(500).json({success:false,Error:'Error :'+error});
+  }
 })
 
 

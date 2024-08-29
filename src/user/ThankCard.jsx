@@ -95,9 +95,14 @@ export default function ThankCard(props){
                                     สำหรับการร่วมสนับสนุน<span style={{fontWeight:'800',fontSize:'18px'}}>โครงการกล้าดีพิทักษ์สิ่งแวดล้อม</span> ต่อลมหายใจป่าชายเลน 
                                 </Title>
                             </Col>
+                            <Col span={24}>
+                                <Text style={{fontSize:'14px',color:'red'}} > * จะได้รับการติดต่อกลับจากเจ้ากหน้าที่ทางโรงพยาบาลในภายหลัง</Text>
+                             </Col>
                         </Row>
                     </Card>
+
                 </Col>
+
                 <Col span={24} className="mt-5 ">
                     {/* <Button type="default"  shape="round" size="large" onClick={handleExport} style={{width:'100%',fontSize:'16px'}} className="custom-button"  > 
                         <DownloadOutlined className="custom-button-icon" /> 

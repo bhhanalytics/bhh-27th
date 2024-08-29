@@ -81,10 +81,10 @@ const ReviewCard = ({
           </figcaption>
           {/* {isEmpty && ( */}
             <>
-              <p className="text-xs font-medium dark:text-white/40">สนับสนุนต้นไม้ {/* <span className='text-yellow-600'>{Number(donate_total).toLocaleString()}</span> ต้น */}</p>
+              <p className="text-xs font-medium dark:text-white/40">สนับสนุน {donate_total} ต้น {/* <span className='text-yellow-600'>{Number(donate_total).toLocaleString()}</span> ต้น */}</p>
               { isNew && <span className='text-yellow-700 text-[.6rem]'>ล่าสุด</span>}
             </>
-       {/*    )} */}
+       {/*  )} */}
         </div>
       </div>
       {/* <blockquote className="mt-2 text-sm">{donate_total}</blockquote> */}

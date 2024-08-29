@@ -500,14 +500,15 @@ input,textarea{
 
 .btn-none{
   /* background-color: #7c9d41 !important; */
-  border: 0px solid transparent !important;
+  border: 1px solid #7c9d41 !important;
   color:#000000 !important;
 }
 
-.btn-none{
+.btn-none:hover{
   /* background-color: #7c9d41 !important; */
-  border: 0px solid transparent !important;
+  border: 1px solid #7c9d41 !important;
   color:#000000 !important;
+  outline: 2px solid rgba(227, 227, 227,0.7);
 }
 .btn-green{
   background-color: #7c9d41 !important;
