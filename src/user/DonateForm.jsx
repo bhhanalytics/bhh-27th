@@ -202,16 +202,16 @@ export default function DonateForm(){
                                             // minHeight:'300px',
                                             // minWidth:'375px',
                                         }}
-                                title={<Title level={4} style={{paddingTop:'10px',textAlign:'center',color:'#133C7B'}}  >โครงการกล้าดีพิทักษ์สิ่งแวดล้อม </Title>}
+                                title={<Title level={4} style={{paddingTop:'10px',textAlign:'center',color:'#7c9d41'}}  >โครงการกล้าดีพิทักษ์สิ่งแวดล้อม </Title>}
                             >
                                 {/* <Title level={4} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#133C7B'}}>โครงการกล้าดีพิทักษ์สิ่งแวดล้อม</Title> */}
                                 <div className="icon-set flex gap-5 w-full items-center justify-center "> 
                                     <div className="w-full max-w-[120px]">
                                         <img src={bhh27Icon} className='object-contain w-full h-full mt-4 mb-4' alt="bhh27icon" />
                                     </div>
-                                    <div className="w-full max-w-[120px]">
+                                    {/* <div className="w-full max-w-[120px]">
                                         <img src={gw} className='object-contain mt-4 mb-4' alt="bhh27icon" />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="icon-set flex gap-5 w-full items-center justify-center "> 
                                     <div className="w-full mt-10 flex item-center justify-center">
@@ -409,7 +409,7 @@ export default function DonateForm(){
                                                 inputMode="decimal"
                                             />
                                         </Form.Item>
-{/* 
+
                                         <Form.Item
                                             name="donate_type"
                                             label="รูปแบบการชำระเงิน"
@@ -419,7 +419,7 @@ export default function DonateForm(){
                                                 <Radio value={'ชำระเงินสด กับ โรงพยาบาลกรุงเทพหาดใหญ่ วันที่ 31 สค. 67'}>ชำระเงินสด กับ โรงพยาบาลกรุงเทพหาดใหญ่ วันที่ 31 สค. 67 </Radio>
                                                 <Radio value={'ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67'}>ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67 </Radio>
                                             </Radio.Group>
-                                        </Form.Item> */}
+                                        </Form.Item>
                                         <Divider />
                                         <Form.Item>
                                             <Button 
