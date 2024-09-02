@@ -349,12 +349,12 @@ function App() {
         <img src={palm} alt="" />
       </div> */}
 
-      <Space direction="vertical" align="center" className='absolute left-2 top-2 p-3'>
+      <Space direction="vertical" align="center" className='absolute right-2 top-2 p-3'>
         <Link to={'/form'} className='hidden sm:flex flex-col'>
-        <span className='text-black underline w-full text-center'>ร่วมสนับสนุนได้ที่นี่</span>
+        <span className='text-black underline w-full text-center mb-2 text-[1.3rem]'>สแกนเพื่อรับแบบฟอร์มร่วมสนับสนุน</span>
 
           <QRCode value={'https://anniversarybangkokhatyai.web.app/form'}
-            size={200} errorLevel="H" />
+            size={300} errorLevel="H" />
         </Link>
 
         <Link to={'/form'} className='block sm:hidden'>
@@ -376,9 +376,9 @@ function App() {
             <div className="w-full max-w-[150px]">
               <img src={bhh27Icon} className='object-contain w-full h-full' alt="bhh27icon" />
             </div>
-            <div className="w-full max-w-[150px]">
+            {/* <div className="w-full max-w-[150px]">
               <img src={gw} className='object-contain' alt="bhh27icon" />
-            </div>
+            </div> */}
           </div>
 
           {/* Summary */}

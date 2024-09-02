@@ -7,8 +7,9 @@ import bgimg from "../assets/img/Mesa de trabajo 1.png"
 import Tree from "../components/Tree";
 import treeimg from "../assets/img/forest/tree.svg";
 import ThankCard from "./ThankCard";
-const {Title,Text} = Typography;
+const {Title,Text,Paragraph} = Typography;
 const {TextArea} = Input;
+import gsblogo from "../assets/img/Logo_GSB_Thailand.svg.png"
 export default function DonateForm(){
 
     const [type,setType] =useState(0);
@@ -22,6 +23,7 @@ export default function DonateForm(){
     const [form] = Form.useForm();
     const api_url = import.meta.env.VITE_BASE_URL;
     const [messageApi, contextHolder] = message.useMessage();
+    
     useEffect(()=>{
         fetchdonate(); 
     },[])
@@ -103,7 +105,8 @@ export default function DonateForm(){
                                 label : item.organization_name,
                                 name :item.organization_name ,
                                 organization_name : item.organization_name,
-                                contact_name : item.contact_name 
+                                contact_name : item.contact_name,
+                                donate_total:item.donate_total
                             }
                         }else{
                             return {
@@ -112,7 +115,8 @@ export default function DonateForm(){
                                 label : item.contact_name,
                                 name : item.contact_name,
                                 organization_name : '',
-                                contact_name : item.contact_name 
+                                contact_name : item.contact_name ,
+                                donate_total:item.donate_total
                             }
                         }
                     })
@@ -409,8 +413,28 @@ export default function DonateForm(){
                                                 inputMode="decimal"
                                             />
                                         </Form.Item>
+                                        {/* <Form.Item>
+                                            <Card
+                                                title="ช่องทางบริจาค"
+                                            >
+                                               
+                                                <img src={gsblogo} style={{width:'150px',margin:'auto'}} />
+                                                <Title level={5} style={{paddingBottom:'6px',paddingTop:'20px'}} >ธนาคารออมสิน </Title> 
+                                                <Paragraph 
+                                                      copyable={{
+                                                        text: '020416626974',
+                                                    }}
+                                                    style={{fontSize:'16px',fontWeight:'600'}}
+                                                    
+                                                >
+                                                    เลขที่บัญชี : 020416626974
+                                                </Paragraph>
+                                                <Title level={5}>ชื่อบัญชี : กลุ่มอนุรักษ์ป่าชายเลน ต.หัวเขา</Title> 
+                                            </Card>
+                                           
+                                        </Form.Item> */}
 
-                                        <Form.Item
+                                        {/* <Form.Item
                                             name="donate_type"
                                             label="รูปแบบการชำระเงิน"
                                             rules={[{ required: true, message: 'Please input the donation total!' }]}
@@ -419,7 +443,7 @@ export default function DonateForm(){
                                                 <Radio value={'ชำระเงินสด กับ โรงพยาบาลกรุงเทพหาดใหญ่ วันที่ 31 สค. 67'}>ชำระเงินสด กับ โรงพยาบาลกรุงเทพหาดใหญ่ วันที่ 31 สค. 67 </Radio>
                                                 <Radio value={'ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67'}>ชำระเงินสด หรือโอน โดยตรงกับ ชมรมปลูกป่าชายเลนฯ วันที่ 31 สค. 67 </Radio>
                                             </Radio.Group>
-                                        </Form.Item>
+                                        </Form.Item> */}
                                         <Divider />
                                         <Form.Item>
                                             <Button 
@@ -461,7 +485,7 @@ export default function DonateForm(){
                     style={ 
                         page === 1 ? 
                         {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%'} 
-                        : height < '1080'  ? 
+                        : height < '1300'  ? 
                             {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%'}
                             :
                             {marginTop:'20px',padding:'20px',backgroundColor:'rgba(255,255,255,0.5)',width:'100%',position:'fixed',bottom:0}}

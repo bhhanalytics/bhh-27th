@@ -1,25 +1,34 @@
-import { Button, Card, Col, Divider, Row ,Typography} from "antd";
+import { Button, Card, Col, Divider, Row ,Typography ,message} from "antd";
 import treeimg from "../assets/img/forest/tree.svg";
 import bhh27Icon from '../assets/img/BHH27icon.png'
 import gw from '../assets/img/gw.png'
 import { useEffect, useRef, useState } from "react";
 import { toPng } from 'html-to-image';
 import { DownloadOutlined } from '@ant-design/icons';
-const {Title,Text} = Typography;
+import gsblogo from "../assets/img/Logo_GSB_Thailand.svg.png"
+const {Title,Text,Paragraph} = Typography;
 
 export default function ThankCard(props){
 
     const [data,setData] = useState({});
     const [height,setHeight] = useState(0);
+    const [messageApi, contextHolder] = message.useMessage();
     // const data ={organization_name:'chalermwat building',contact_name:'เฉลิมวัฒน์ ตั้งหิรัญเสถียร'}
     const cardRef = useRef();
 
     useEffect(()=>{
         if(props.data ){
             setData(props.data);
+            console.log(props.data);
         }
     },[props]);
 
+    const success = (massage) => {
+        messageApi.open({
+          type: 'success',
+          content: massage,
+        });
+      };
     const handleExport = () => {
       if (cardRef.current) {
         toPng(cardRef.current)
@@ -35,8 +44,17 @@ export default function ThankCard(props){
       }
     };
 
+    const handleCopy = () => {
+        navigator.clipboard.writeText('020416626974').then(() => {
+            success('คัดลอกเลขบัญชีสำเร็จ');
+        }).catch(err => {
+          console.log('filed copied');
+        });
+      };
+
     return(
         <>
+            {contextHolder}
             <Row                        
                 style={{
                             width:'90%',
@@ -72,7 +90,7 @@ export default function ThankCard(props){
 
                                 <div className="icon-set flex gap-5 w-full items-center justify-center">
                                     <div className="w-full mt-10 flex item-center justify-center">
-                                        <img src={treeimg} width="200px"  />
+                                        <img src={treeimg} width="150px"  />
                                     </div>
                                 </div>
                                 
@@ -91,13 +109,31 @@ export default function ThankCard(props){
                                     :
                                     null
                                 }
+       
+                                {
+                                    data.donate_total ?
+                                        <Title 
+                                            level={5} 
+                                            style={{
+                                                fontFamily:'Sarabun',
+                                                fontWeight:'600',
+                                                color:'#133C7B',
+                                                textAlign:'center',
+                                                fontSize:'1rem'
+                                            }}
+                                        >
+                                            ร่วมสนับสนุนจำนวน {data.donate_total} ต้น
+                                        </Title>
+                                    : null
+                                }
+
                                 <Title level={5} style={{fontFamily:'Sarabun',fontWeight:'600',color:'#000',textAlign:'center'}}>
                                     สำหรับการร่วมสนับสนุน<span style={{fontWeight:'800',fontSize:'18px'}}>โครงการกล้าดีพิทักษ์สิ่งแวดล้อม</span> ต่อลมหายใจป่าชายเลน 
                                 </Title>
                             </Col>
-                            <Col span={24}>
-                                <Text style={{fontSize:'14px',color:'red'}} > * จะได้รับการติดต่อกลับจากเจ้ากหน้าที่ทางโรงพยาบาลในภายหลัง</Text>
-                             </Col>
+                            {/* <Col span={24}>
+                                <Text style={{fontSize:'14px',color:'red'}} > * จะได้รับการติดต่อกลับจากเจ้าหน้าที่ทางโรงพยาบาลในภายหลัง</Text>
+                             </Col> */}
                         </Row>
                     </Card>
 
@@ -108,9 +144,33 @@ export default function ThankCard(props){
                         <DownloadOutlined className="custom-button-icon" /> 
                         บันทึกการ์ด
                     </Button> */}
-                    <button className="custom-button" onClick={handleExport} >
+                    {/* <button className="custom-button" onClick={handleExport} >
                         บันทึกการ์ด
-                    </button>
+                    </button> */}
+                </Col>
+                <Col span={24} >
+                <Card
+                    title="ช่องทางบริจาค"
+                >
+                    
+                    <img src={gsblogo} style={{width:'150px',margin:'auto'}} />
+                    <Title level={5} style={{paddingBottom:'6px',paddingTop:'20px'}} >ธนาคารออมสิน </Title> 
+                    {/* <Paragraph 
+                            copyable={{
+                            text: '020416626974',
+                        }}
+                        style={{fontSize:'16px',fontWeight:'600'}}
+                        
+                    >
+                        เลขที่บัญชี : 020416626974
+                    </Paragraph> */}
+                    <Text style={{fontSize:'16px',fontWeight:'600'}} >เลขที่บัญชี : 020416626974</Text>
+
+                    <Button className="btn-green" onClick={()=>{handleCopy()}} > คัดลอก</Button>
+                   
+                    
+                    <Title level={5}>ชื่อบัญชี : กลุ่มอนุรักษ์ป่าชายเลน ต.หัวเขา</Title> 
+                </Card>
                 </Col>
                 <Col span={24} className="mt-5 ">
                     {/* <button className="custom-button"  >
