@@ -12,6 +12,12 @@
 
 # Change Log  🔁
 
+
+### 20240831.v1.2.7
+- update summary layout
+- remove icon 
+- add bank detail
+
 ### 20240830.v1.2.6
 - Show Donate Total in marquee
 - Eidt Layout Form Donate 

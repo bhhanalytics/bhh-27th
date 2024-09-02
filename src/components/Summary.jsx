@@ -11,7 +11,7 @@ export default function Summary({ tree , carbon , className}) {
   },[treeCount]) */
 
   return (
-    <section className={`${className} transition duration-500 ease-in-out transform hover:scale-110 w-full md:w-2/4 grid grid-cols-12 relative mt-[50px] text-black p-5 items-center justify-center pb-[100px]  justify-items-center`}>
+    <section className={`${className} transition duration-500 ease-in-out transform hover:scale-110 w-full md:w-2/5 grid grid-cols-12 relative mt-[50px] text-black p-5 items-center justify-center pb-[100px]  justify-items-center`}>
 
           {/*   <SummaryItem icon={ <Icon icon="ph:trend-up" />} value={2030230232} subtitile={"ยอดบริจาค"} postfix={'บาท'}  className={'md:col-span-12'} /> */}
             <SummaryItem colorFrom={'#58eeac'} colorTo={'#77f132'} className={'plant'} icon={ <Icon icon="ph:plant-fill"  />}  value={tree} subtitile={"ร่วมปลูกต้นไม้ไปแล้ว"} postfix={'ต้น'} />
@@ -51,7 +51,6 @@ const SummaryItem = ({ value , subtitile , icon , postfix , className , colorFro
 
                             <div className='w-full flex justify-between items-end font-bold '> 
                                 <span className='select-text'>{ value > 0 ? <NumberTicker value={value} /> : 0 } </span>
-                                
 
                                 <span className='text-[1rem]'> {postfix} </span>
                              </div> 
